@@ -11,9 +11,9 @@ cells=datos["cells"]
 
 for entity in cells:
     entityName = entity
-    #print(entityName)
-    print(cells[entityName])
-    #print(datos["rows"])
-    for entityProperty in cells[entityName]:
-        print("Propiedad " + entityProperty)
+    value=cells[entityName]["value"]
+    neighbors=cells[entityName]["neighbors"]
+    print(value)
+    print(neighbors)
+
     
