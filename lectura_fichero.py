@@ -14,6 +14,7 @@ class Lectura_ficheros():
         lista_neighbours=[]
         for entity in cells:
             entityName = entity
+            print(entity)
             value=cells[entityName]["value"]
             neighbors=cells[entityName]["neighbors"]
             lista_values.append(value)
