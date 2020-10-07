@@ -31,10 +31,10 @@ class Laberinto(object):
         else:
             self.filas=args[0]
             self.columnas=args[1]
-            self.tablero=self.generar_tuplas(self.filas,self.columnas)
+            self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
 
-    def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino):
+    def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
     while(len(no_visitados)!=0):
         casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
         while(casilla_actual in visitados):
@@ -63,7 +63,7 @@ class Laberinto(object):
                         casilla_actual=(f-1,c)
                         visitados.remove(casilla_actual)
                         camino.append(casilla_actual)
-                        self.excavar()
+                        self.excavar(camino,visitados,casillas)
 
             elif(movimiento==1):
             
@@ -81,7 +81,7 @@ class Laberinto(object):
                         casilla_actual=(f,c+1)
                         visitados.remove(casilla_actual)
                         camino.append(casilla_actual)
-                        self.excavar()
+                        self.excavar(camino,visitados,casillas)
             
             elif (movimiento==2):
                  if  ((f+1,c) in no_visitados): #sur
@@ -98,7 +98,7 @@ class Laberinto(object):
                         casilla_actual=(f+1,c)
                         visitados.remove(casilla_actual)
                         camino.append(casilla_actual)
-                        self.excavar()
+                        self.excavar(camino,visitados,casillas)
             
             elif(movimiento==3):
                  if ((f,c-1) in no_visitados): #Este 
@@ -116,25 +116,38 @@ class Laberinto(object):
                         casilla_actual=(f,c-1)
                         visitados.remove(casilla_actual)
                         camino.append(casilla_actual)
-                        self.excavar()
+                        self.excavar(camino,visitados,casillas)
                 
-    def excavar(self,camino,visitados):
+    def excavar(self,camino,visitados,casillas):
         n=0
         while(n<(len(camino)-1)):
-            f,c=camino[n]
-            w,x=camino[n+1]
-            i=w-f
-            j=x-c
-            if(i==-1): 
-                #Cambiar norte de n y sur de n+1
-            elif(i==1):
-                #Cambiar sur de n y norte de n+1
-            elif(j==-1):
-                #Cambiar este de n y oeste de n+1
-            elif(j==1):
-                #Cambiar oeste de n y este de n+1
+            f0,c0=camino[n]
+            f1,c1=camino[n+1]
+            encontrado=False
+            i=0
+            while(encontrado==False):
+                if(casillas[i].get_tupla()==camino[n]): 
+                    encontrado==True
+                i+=1
+
+            f2=f1-f0
+            c2=c1-c0
+
+            if(f2==-1): 
+                casillas[i].set_N(True)
+                casillas[i-self.columnas].set_S(True)    
+            elif(f2==1):
+                casillas[i].set_S(True)
+                casillas[i+self.columnas].set_N(True)
+            elif(c2==-1):
+                casillas[i].set_O(True)
+                casillas[i-1].set_E(True)
+            elif(c2==1):
+                casillas[i].set_E(True)
+                casillas[i+1].set_O(True)
             n+=1
-        visitados.extend(element for element in camino if element not in visitados)
+            
+        visitados.extend(camino)
         camino=[]
 
     def generar_tuplas(self):
@@ -164,14 +177,10 @@ class Laberinto(object):
         casilla_destino=(randint(0,self.filas-1),randint(0,self.columnas-1))
         visitados.append(casilla_destino)
         no_visitados.remove(casilla_destino)
-        
-
-        
-        
         camino = [0] * self.filas
         for i in range(self.filas):
             camino[i] = [0] * self.columnas
-        self.movimiento_valido(no_visitados,visitados,casilla_destino,camino,casilla_inicio)
+        self.movimiento_valido(no_visitados,visitados,casilla_destino,camino,casilla_inicio, casillas)
 
     def movimiento_random(self,filas,columnas):
         lista_movimientos=[0,1,2,3]
