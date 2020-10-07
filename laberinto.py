@@ -1,28 +1,41 @@
 import json
 from random import randint
+from casilla import Casilla
+
 class Laberinto(object):
     def __init__(self,fichero_json=None,*args,**kwargs):
-
-        with open(fichero_json) as f:
-            datos=f.read()
-        datos=json.loads(datos)
-        self.filas=datos["rows"]
-        self.columnas=datos["cols"]
-        self.max_nmax_n=datos["max_n"]
-        self.mov=datos["mov"]
-        self.id_mov=datos["id_mov"]
-        self.cells=datos["cells"]
-        self.value=[]
-        self.celdas=[]
-        for entity in self.cells:
-            entityName = entity #(0, 0)  (0, 1) 
-            v=self.cells[entityName]["value"]
-            neighbors=self.cells[entityName]["neighbors"]
-            self.value.append(v)
-            self.celdas.append(neighbors)
+        if (len(args)!=1):
+            try:
+                with open(fichero_json) as f:
+                    datos=f.read()
+                datos=json.loads(datos)
+            except:
+                print("No se ha podido leer el fichero json")
+            self.filas=datos["rows"]
+            self.columnas=datos["cols"]
+            self.max_nmax_n=datos["max_n"]
+            self.mov=datos["mov"]
+            self.id_mov=datos["id_mov"]
+            self.cells=datos["cells"]
+            self.value=[]
+            self.celdas=[]
+            for entity in self.cells:
+                entityName = entity #(0, 0)  (0, 1) 
+                v=self.cells[entityName]["value"]
+                neighbors=self.cells[entityName]["neighbors"]
+                self.value.append(v)
+                self.celdas.append(neighbors)
+            else:
+                self.filas=
+                self.columnas=
+        else:
+            self.filas=args[0]
+            self.columnas=args[1]
+            self.tablero=self.generar_tuplas(self.filas,self.columnas)
+            
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino):
-    while()
+    while(len(no_visitados)!=0):
         casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
         while(casilla_actual in visitados):
             casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
@@ -105,21 +118,42 @@ class Laberinto(object):
                         camino.append(casilla_actual)
                         self.excavar()
                 
+    def excavar(self,camino,visitados):
+        n=0
+        while(n<(len(camino)-1)):
+            f,c=camino[n]
+            w,x=camino[n+1]
+            i=w-f
+            j=x-c
+            if(i==-1): 
+                #Cambiar norte de n y sur de n+1
+            elif(i==1):
+                #Cambiar sur de n y norte de n+1
+            elif(j==-1):
+                #Cambiar este de n y oeste de n+1
+            elif(j==1):
+                #Cambiar oeste de n y este de n+1
+            n+=1
+        visitados.extend(element for element in camino if element not in visitados)
+        camino=[]
 
     def generar_tuplas(self):
         tuplas=[]
+        casillas=[]
         i=0
         j=0
         while i<self.columnas:
             t=(i,0)
             while j<self.filas:
                 t=(i,j)
+                casilla=Casilla(t,0)
                 tuplas.append(t)
+                casillas.append(casilla)
                 j+=1
 
             i+=1
             j=0
-        return tuplas
+        return tuplas,casillas
 
 
         
