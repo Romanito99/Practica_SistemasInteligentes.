@@ -34,3 +34,10 @@ class Casilla(object):
         self.O=O
     def set_valor(self,valor):
         self.valor=valor
+    def string(self):
+        s=[]
+        s.append(self.N)
+        s.append(self.E)
+        s.append(self.S)
+        s.append(self.O)
+        return s
