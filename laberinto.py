@@ -27,12 +27,10 @@ class Laberinto(object):
                 neighbors=self.cells[entityName]["neighbors"]
                 self.value.append(v)
                 self.celdas.append(neighbors)
-            '''else:
-                self.filas=
-                self.columnas='''
+            
         else:
-            self.filas=4
-            self.columnas=4
+            self.filas=50
+            self.columnas=50
             #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
 
@@ -46,33 +44,25 @@ class Laberinto(object):
             camino.append(casilla_actual)
             no_visitados.remove(casilla_actual)
         
-            print("antes del puto while")
+            
             while(casilla_actual not in visitados):
-                print("otra vuelta ")
-                print("\n")
+                
                 f,c=casilla_actual
                 movimiento=self.movimiento_random(f,c)
                 if(movimiento==0):
-                    print("entro a 0")
-                    print("casilla",casilla_actual)
-                    print("visitados",visitados)
-                    print("novisitados",no_visitados)
-                    print("vcamino",camino)
-                    print("vecino",(f-1,c) )
+                    
                     #sleep(2)
                     if  ((f-1,c) in no_visitados): #Norte 
-                        print("entro a no")
+                        
                         casilla_actual=(f-1,c)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-                        print("visitados",visitados)
-                        print("novisitado",no_visitados)
-                        print("vcamino",camino)
+                        
                         
 
                     else: 
                         if(f-1,c) in camino:
-                            print("entro a camino")
+                            #print("entro a camino")
                             n=camino.index((f-1,c))
                             x=camino[n+1:]
                             no_visitados.extend(x)
@@ -81,33 +71,25 @@ class Laberinto(object):
 
                             casilla_actual=(f-1,c)
                         elif (f-1,c) in visitados:
-                            print("entro a visitado")
+                            #print("entro a visitado")
                             casilla_actual=(f-1,c)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
                             camino,casillas,visitados=self.excavar(camino,visitados,casillas)
 
                 elif(movimiento==1):
-                    print("entro a 1")
-                    print("casilla",casilla_actual)
-                    print("visitados",visitados)
-                    print("novisitados",no_visitados)
-                    print("vcamino",camino)
-                    print("vecino",(f,c+1) )
-                    #sleep(2)
+                    
                     if ((f,c+1) in no_visitados): #Este 
-                        print("entro a no")
+                        
                         casilla_actual=(f,c+1)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-                        print("visitados",visitados)
-                        print("novisitado",no_visitados)
-                        print("vcamino",camino)
+                        
                         
 
                     else: 
                         if(f,c+1) in camino:
-                            print("entro a camino")
+                            #print("entro a camino")
                             n=camino.index((f,c+1))
                             x=camino[n+1:]
                             no_visitados.extend(x)
@@ -115,74 +97,59 @@ class Laberinto(object):
                             
                             casilla_actual=(f,c+1)
                         elif (f,c+1) in visitados:
-                            print("entro a visitado")
+                           
                             casilla_actual=(f,c+1)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
                             camino,casillas,visitados= self.excavar(camino,visitados,casillas)
                 
                 elif (movimiento==2):
-                    print("entro a 2")
-                    print("casilla",casilla_actual)
-                    print("visitados",visitados)
-                    print("novisitados",no_visitados)
-                    print("vcamino",camino)
-                    print("vecino",(f+1,c) )
-                    #sleep(2)
+                    
                     if  ((f+1,c) in no_visitados): #sur
-                        print("entro a no")
+                        
                         casilla_actual=(f+1,c)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-                        print("visitados",visitados)
-                        print("novisitado",no_visitados)
-                        print("vcamino",camino)
+                      
                         
                     
                     else: 
                         if(f+1,c) in camino:
-                            print("entro a camino")
+                           
                             n=camino.index((f+1,c))
                             x=camino[n+1:]
                             no_visitados.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f+1,c)
                         elif (f+1,c) in visitados:
-                            print("entro a visitado")
+                            
                             casilla_actual=(f+1,c)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
                             camino,casillas,visitados=self.excavar(camino,visitados,casillas)
                 
                 elif(movimiento==3):
-                    print("entro a 3")
-                    print("casilla",casilla_actual)
-                    print("visitados",visitados)
-                    print("novisitados",no_visitados)
-                    print("vcamino",camino)
-                    print("vecino",(f,c-1) )
+                    
                     #sleep(2)
                     if ((f,c-1) in no_visitados): #Este 
-                        print("entro a no")
+                       
                         casilla_actual=(f,c-1)
                         
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-                        print("visitados",visitados)
-                        print("novisitado",no_visitados)
-                        print("vcamino",camino)
+                       
                         
 
                     else: 
                         if(f,c-1) in camino:
-                            print("entro a camino")
+                            
                             n=camino.index((f,c-1))
                             x=camino[n+1:]
                             no_visitados.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f,c-1)
                         elif (f,c-1) in visitados:
-                            print("entro a visitado")
+                            
                             casilla_actual=(f,c-1)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
@@ -198,15 +165,12 @@ class Laberinto(object):
             encontrado=False
             i=0
             while(encontrado==False):
-                print("csilla",casillas[i].get_tupla())
-                print("caminon",camino[n])
+                
                 if(casillas[i].get_tupla()==camino[n]): 
                     encontrado=True
                 else: 
                     i+=1
-            print(i)
-            print(f0,c0)
-            print(f1,c1)
+            
 
             
 
@@ -217,36 +181,27 @@ class Laberinto(object):
                 casillas[i].set_N(True)
                 casillas[i-self.columnas].set_S(True)
                 variable=(i-self.columnas)
-                print(i)
+               
                 
-                print("casillasN",casillas[i].get_N())
-                print("casillasS",casillas[variable].get_S())
+                
                 #sleep(10)
                    
             if(f2==1):
                 casillas[i].set_S(True)
                 casillas[i+self.columnas].set_N(True)
-                variable=(i+self.columnas)
-                print(i)
-                print("casillasS",casillas[i].get_S())
-                print("casillasN",casillas[variable].get_N())
+                
                 #sleep(10)
             if(c2==-1):
                 casillas[i].set_O(True)
                 casillas[i-1].set_E(True)
                 visitado=i-1
-                print(i)
-                print("casillaso",casillas[i].get_O())
-                print("casillase",casillas[visitado].get_E())
+                
                 #sleep(10)
 
             if(c2==1):
                 casillas[i].set_E(True)
                 casillas[i+1].set_O(True)
-                visitado=i+1
-                print(i)
-                print("casillase",casillas[i].get_E())
-                print("casillaso",casillas[visitado].get_O())
+                
                 #sleep(10)
             n+=1
             
@@ -284,16 +239,15 @@ class Laberinto(object):
         no_visitados.remove(casilla_destino)
         
        
-        print("vcamino",camino)
+       
         casillas=self.movimiento_valido(no_visitados,visitados,casilla_destino,camino, casillas)
         return casillas
 
 
     def movimiento_random(self,filas,columnas):
-        print("filas papa", filas)
-        print("columna papá",columnas)
+        
         lista_movimientos=[0,1,2,3]
-        print(lista_movimientos)
+        
         if (filas==0):
             lista_movimientos.remove(0) #norte 
         elif (filas==self.filas-1):
@@ -305,27 +259,23 @@ class Laberinto(object):
             lista_movimientos.remove(1) #Oeste 
         
         numero=randint(0,len(lista_movimientos)-1)
-        print("numero random",numero)
+        
 
-        print("la lista es",lista_movimientos)
+        
         numero=lista_movimientos[numero]
-        print("el numero es",numero)
+        
 
         return numero
 
     def dibujar(self,casillas):
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
         
-        plt.axvspan(-0.1, 5, facecolor='black', alpha=2)
-        plt.ylim(4.1,-0.1)
-        plt.xlim(-0.1,4.1)
+        plt.axvspan(-0.1, self.columnas, facecolor='black', alpha=2)
+        plt.ylim(self.filas+0.1,-0.1)
+        plt.xlim(-0.1,self.columnas+0.1)
         plt.style.use('dark_background')
         for i in casillas:
-            print(i.get_tupla())
-            print(i.get_N())
-            print(i.get_E())
-            print(i.get_S())
-            print(i.get_O())
+            
             c,f=i.get_tupla()
             #sleep(5)
             if (i.get_S()==False):
