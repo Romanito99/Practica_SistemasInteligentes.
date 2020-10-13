@@ -49,7 +49,6 @@ class Laberinto(object):
             print("antes del puto while")
             while(casilla_actual not in visitados):
                 print("otra vuelta ")
-                sleep(2)
                 print("\n")
                 f,c=casilla_actual
                 movimiento=self.movimiento_random(f,c)
@@ -85,7 +84,7 @@ class Laberinto(object):
                             casilla_actual=(f-1,c)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino=self.excavar(camino,visitados,casillas)
+                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
 
                 elif(movimiento==1):
                     print("entro a 1")
@@ -118,7 +117,7 @@ class Laberinto(object):
                             casilla_actual=(f,c+1)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino= self.excavar(camino,visitados,casillas)
+                            camino,casillas,visitados= self.excavar(camino,visitados,casillas)
                 
                 elif (movimiento==2):
                     print("entro a 2")
@@ -150,7 +149,7 @@ class Laberinto(object):
                             casilla_actual=(f+1,c)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino=self.excavar(camino,visitados,casillas)
+                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
                 
                 elif(movimiento==3):
                     print("entro a 3")
@@ -183,7 +182,8 @@ class Laberinto(object):
                             casilla_actual=(f,c-1)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino=self.excavar(camino,visitados,casillas)
+                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
+        return casillas
                 
     def excavar(self,camino,visitados,casillas):
         n=0
@@ -196,7 +196,6 @@ class Laberinto(object):
             while(encontrado==False):
                 print("csilla",casillas[i].get_tupla())
                 print("caminon",camino[n])
-                sleep(5)
                 if(casillas[i].get_tupla()==camino[n]): 
                     encontrado=True
                 else: 
@@ -208,22 +207,34 @@ class Laberinto(object):
 
             if(f2==-1): 
                 casillas[i].set_N(True)
-                casillas[i-self.columnas].set_S(True) 
+                casillas[i-self.columnas].set_S(True)
+                variable=(i-self.columnas)
+                print(i)
+                
+                print("casillasN",casillas[i].get_N())
+                
                    
-            elif(f2==1):
+            if(f2==1):
                 casillas[i].set_S(True)
                 casillas[i+self.columnas].set_N(True)
-            elif(c2==-1):
+                print(i)
+                print("casillasS",casillas[i].get_S())
+            if(c2==-1):
                 casillas[i].set_O(True)
                 casillas[i-1].set_E(True)
-            elif(c2==1):
+                print(i)
+                print("casillaso",casillas[i].get_O())
+
+            if(c2==1):
                 casillas[i].set_E(True)
                 casillas[i+1].set_O(True)
+                print(i)
+                print("casillase",casillas[i].get_E())
             n+=1
-            
+            sleep(10)
         visitados.extend(camino)
         camino=[]
-        return camino
+        return camino,casillas,visitados
 
     def generar_tuplas(self):
         tuplas=[]
@@ -256,7 +267,9 @@ class Laberinto(object):
         
        
         print("vcamino",camino)
-        self.movimiento_valido(no_visitados,visitados,casilla_destino,camino, casillas)
+        casillas=self.movimiento_valido(no_visitados,visitados,casilla_destino,camino, casillas)
+        return casillas
+
 
     def movimiento_random(self,filas,columnas):
         print("filas papa", filas)
@@ -284,34 +297,39 @@ class Laberinto(object):
 
     def dibujar(self,casillas):
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
-        plt.axvspan(-0.1, 5, facecolor='black', alpha=2)
+        
+        #plt.axvspan(-0.1, 5, facecolor='black', alpha=2)
         plt.xlim(-0.1,self.filas+0.1)
         plt.ylim(self.columnas+0.1,-0.1)
-        plt.style.use('dark_background')
+        #plt.style.use('dark_background')
         for i in casillas:
             if (i.get_N()==False):
                 f,c=i.get_tupla()
-                plt.plot([f,f],[c,c+1],color='white')
+                plt.plot([f,f],[c,c+1],color='black')
             if (i.get_E()==False):
                 f,c=i.get_tupla()
-                plt.plot([f,f+1],[c+1,c+1],color='white')
+                plt.plot([f,f+1],[c+1,c+1],color='black')
             if (i.get_S()==False):
                 f,c=i.get_tupla()
-                plt.plot([f+1,f+1],[c,c+1],color='white')
+                plt.plot([f+1,f+1],[c,c+1],color='black')
             if (i.get_O()==False):
                 f,c=i.get_tupla()
-                plt.plot([f,f+1],[c,c],color='white')
+                plt.plot([f,f+1],[c,c],color='black')
         
-        plt.savefig("hola.png")
+        plt.savefig("laberinto.png")
 
-    def to_json(self):
+    def to_json(self,casillas):
         data={}
         tupla=""
         neighbours=''
-        total=''
-        lista=[]
+        data['rows']=self.filas
+        data['cols']=self.columnas
+        data['max_n']=4
+        data['mov']=[[-1,0],[0,1],[1,0],[0,-1]]
+        data['id_mov']=["N","E","S","O"]
         data['cells']={}
-        for i in objetos:
+
+        for i in casillas:
             t=i.get_tupla()
             value=i.get_valor()
             dicc_cells={}
@@ -324,10 +342,11 @@ class Laberinto(object):
             dicc_cells[tupla].update(dicc_tuplas)
             data['cells'].update(dicc_cells)
 
-        print(data)
 
         with open("jesus.json", "w") as f:
             json.dump(data, f,indent=4)
 
 a=Laberinto(4,4)
-a.tablero()
+lista=a.tablero()
+a.to_json(lista)
+a.dibujar(lista)
