@@ -32,7 +32,7 @@
             "neighbors": [
                 false,
                 true,
-                true,
+                false,
                 false
             ]
         },
@@ -40,8 +40,8 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
                 false,
+                true,
                 true
             ]
         },
@@ -50,8 +50,8 @@
             "neighbors": [
                 false,
                 false,
-                false,
-                true
+                true,
+                false
             ]
         },
         "(0, 3)": {
@@ -66,27 +66,27 @@
         "(1, 0)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
                 true,
+                false,
                 false
             ]
         },
         "(1, 1)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
-                false
+                true
             ]
         },
         "(1, 2)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
-                false,
+                true,
+                true,
                 true
             ]
         },
@@ -95,16 +95,16 @@
             "neighbors": [
                 true,
                 false,
-                true,
+                false,
                 true
             ]
         },
         "(2, 0)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
                 false,
+                false,
+                true,
                 false
             ]
         },
@@ -112,33 +112,33 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
                 false,
-                true
+                true,
+                false
             ]
         },
         "(2, 2)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
-                false,
-                true
+                true,
+                true,
+                false
             ]
         },
         "(2, 3)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
-                true,
+                false,
+                false,
                 true
             ]
         },
         "(3, 0)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 false
@@ -147,7 +147,7 @@
         "(3, 1)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 true
@@ -156,7 +156,7 @@
         "(3, 2)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 true
@@ -165,7 +165,7 @@
         "(3, 3)": {
             "value": 0,
             "neighbors": [
-                true,
+                false,
                 false,
                 false,
                 true

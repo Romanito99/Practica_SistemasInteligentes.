@@ -59,6 +59,7 @@ class Laberinto(object):
                     print("novisitados",no_visitados)
                     print("vcamino",camino)
                     print("vecino",(f-1,c) )
+                    #sleep(2)
                     if  ((f-1,c) in no_visitados): #Norte 
                         print("entro a no")
                         casilla_actual=(f-1,c)
@@ -93,6 +94,7 @@ class Laberinto(object):
                     print("novisitados",no_visitados)
                     print("vcamino",camino)
                     print("vecino",(f,c+1) )
+                    #sleep(2)
                     if ((f,c+1) in no_visitados): #Este 
                         print("entro a no")
                         casilla_actual=(f,c+1)
@@ -126,6 +128,7 @@ class Laberinto(object):
                     print("novisitados",no_visitados)
                     print("vcamino",camino)
                     print("vecino",(f+1,c) )
+                    #sleep(2)
                     if  ((f+1,c) in no_visitados): #sur
                         print("entro a no")
                         casilla_actual=(f+1,c)
@@ -158,6 +161,7 @@ class Laberinto(object):
                     print("novisitados",no_visitados)
                     print("vcamino",camino)
                     print("vecino",(f,c-1) )
+                    #sleep(2)
                     if ((f,c-1) in no_visitados): #Este 
                         print("entro a no")
                         casilla_actual=(f,c-1)
@@ -200,6 +204,10 @@ class Laberinto(object):
                     encontrado=True
                 else: 
                     i+=1
+            print(i)
+            print(f0,c0)
+            print(f1,c1)
+
             
 
             f2=f1-f0
@@ -212,26 +220,36 @@ class Laberinto(object):
                 print(i)
                 
                 print("casillasN",casillas[i].get_N())
-                
+                print("casillasS",casillas[variable].get_S())
+                #sleep(10)
                    
             if(f2==1):
                 casillas[i].set_S(True)
                 casillas[i+self.columnas].set_N(True)
+                variable=(i+self.columnas)
                 print(i)
                 print("casillasS",casillas[i].get_S())
+                print("casillasN",casillas[variable].get_N())
+                #sleep(10)
             if(c2==-1):
                 casillas[i].set_O(True)
                 casillas[i-1].set_E(True)
+                visitado=i-1
                 print(i)
                 print("casillaso",casillas[i].get_O())
+                print("casillase",casillas[visitado].get_E())
+                #sleep(10)
 
             if(c2==1):
                 casillas[i].set_E(True)
                 casillas[i+1].set_O(True)
+                visitado=i+1
                 print(i)
                 print("casillase",casillas[i].get_E())
+                print("casillaso",casillas[visitado].get_O())
+                #sleep(10)
             n+=1
-            sleep(10)
+            
         visitados.extend(camino)
         camino=[]
         return camino,casillas,visitados
@@ -298,23 +316,38 @@ class Laberinto(object):
     def dibujar(self,casillas):
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
         
-        #plt.axvspan(-0.1, 5, facecolor='black', alpha=2)
-        plt.xlim(-0.1,self.filas+0.1)
-        plt.ylim(self.columnas+0.1,-0.1)
-        #plt.style.use('dark_background')
+        plt.axvspan(-0.1, 5, facecolor='black', alpha=2)
+        plt.ylim(4.1,-0.1)
+        plt.xlim(-0.1,4.1)
+        plt.style.use('dark_background')
         for i in casillas:
-            if (i.get_N()==False):
-                f,c=i.get_tupla()
-                plt.plot([f,f],[c,c+1],color='black')
-            if (i.get_E()==False):
-                f,c=i.get_tupla()
-                plt.plot([f,f+1],[c+1,c+1],color='black')
+            print(i.get_tupla())
+            print(i.get_N())
+            print(i.get_E())
+            print(i.get_S())
+            print(i.get_O())
+            c,f=i.get_tupla()
+            #sleep(5)
             if (i.get_S()==False):
-                f,c=i.get_tupla()
-                plt.plot([f+1,f+1],[c,c+1],color='black')
+                
+                plt.plot([f,f+1],[c+1,c+1],color='white',linewidth=3.0)
+            else:
+                plt.plot([f,f+1],[c+1,c+1],color='dimgray',linestyle="--")
+            if (i.get_E()==False):
+            
+                plt.plot([f+1,f+1],[c,c+1],color='white',linewidth=3.0)
+            else:   
+                plt.plot([f+1,f+1],[c,c+1],color='dimgray',linestyle="--")
+            if (i.get_N()==False):
+                
+                plt.plot([f,f+1],[c,c],color='white',linewidth=3.0)
+            else:
+                plt.plot([f,f+1],[c,c],color='dimgray',linestyle="--")
             if (i.get_O()==False):
-                f,c=i.get_tupla()
-                plt.plot([f,f+1],[c,c],color='black')
+                
+                plt.plot([f,f],[c,c+1],color='white',linewidth=3.0)
+            else:
+                plt.plot([f,f],[c,c+1],color='dimgray',linestyle="--")
         
         plt.savefig("laberinto.png")
 
