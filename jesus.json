@@ -31,7 +31,7 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
+                true,
                 true,
                 false
             ]
@@ -42,15 +42,15 @@
                 false,
                 false,
                 true,
-                false
+                true
             ]
         },
         "(0, 2)": {
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
+                false,
                 false
             ]
         },
@@ -58,9 +58,9 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
                 false,
-                false
+                true,
+                true
             ]
         },
         "(0, 4)": {
@@ -69,14 +69,14 @@
                 false,
                 true,
                 true,
-                true
+                false
             ]
         },
         "(0, 5)": {
             "value": 0,
             "neighbors": [
                 false,
-                false,
+                true,
                 false,
                 true
             ]
@@ -86,8 +86,8 @@
             "neighbors": [
                 false,
                 false,
-                true,
-                false
+                false,
+                true
             ]
         },
         "(0, 7)": {
@@ -103,7 +103,7 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
+                false,
                 true,
                 true
             ]
@@ -113,15 +113,15 @@
             "neighbors": [
                 false,
                 false,
-                false,
-                true
+                true,
+                false
             ]
         },
         "(1, 0)": {
             "value": 0,
             "neighbors": [
                 true,
-                true,
+                false,
                 true,
                 false
             ]
@@ -130,27 +130,27 @@
             "value": 0,
             "neighbors": [
                 true,
-                true,
                 false,
-                true
+                false,
+                false
             ]
         },
         "(1, 2)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
                 false,
-                true
+                false,
+                true,
+                false
             ]
         },
         "(1, 3)": {
             "value": 0,
             "neighbors": [
+                true,
                 false,
                 true,
-                true,
-                true
+                false
             ]
         },
         "(1, 4)": {
@@ -158,8 +158,8 @@
             "neighbors": [
                 true,
                 true,
-                false,
-                true
+                true,
+                false
             ]
         },
         "(1, 5)": {
@@ -167,16 +167,16 @@
             "neighbors": [
                 false,
                 true,
-                false,
+                true,
                 true
             ]
         },
         "(1, 6)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
-                true,
+                false,
+                false,
                 true
             ]
         },
@@ -184,8 +184,8 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
+                false,
                 false
             ]
         },
@@ -195,15 +195,15 @@
                 true,
                 true,
                 true,
-                false
+                true
             ]
         },
         "(1, 9)": {
             "value": 0,
             "neighbors": [
-                false,
-                false,
                 true,
+                false,
+                false,
                 true
             ]
         },
@@ -228,9 +228,9 @@
         "(2, 2)": {
             "value": 0,
             "neighbors": [
-                false,
-                false,
                 true,
+                true,
+                false,
                 true
             ]
         },
@@ -240,14 +240,14 @@
                 true,
                 true,
                 false,
-                false
+                true
             ]
         },
         "(2, 4)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
+                false,
                 false,
                 true
             ]
@@ -255,26 +255,26 @@
         "(2, 5)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 false,
                 true,
-                true
+                false
             ]
         },
         "(2, 6)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
                 false,
+                true,
+                true,
                 false
             ]
         },
         "(2, 7)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 false,
                 true
             ]
@@ -283,26 +283,26 @@
             "value": 0,
             "neighbors": [
                 true,
-                false,
                 true,
-                false
+                false,
+                true
             ]
         },
         "(2, 9)": {
             "value": 0,
             "neighbors": [
+                false,
+                false,
                 true,
-                false,
-                false,
-                false
+                true
             ]
         },
         "(3, 0)": {
             "value": 0,
             "neighbors": [
                 true,
-                false,
-                false,
+                true,
+                true,
                 false
             ]
         },
@@ -310,18 +310,18 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
-                true,
-                false
+                false,
+                false,
+                true
             ]
         },
         "(3, 2)": {
             "value": 0,
             "neighbors": [
+                false,
                 true,
                 false,
-                false,
-                true
+                false
             ]
         },
         "(3, 3)": {
@@ -330,7 +330,7 @@
                 false,
                 true,
                 true,
-                false
+                true
             ]
         },
         "(3, 4)": {
@@ -354,7 +354,7 @@
         "(3, 6)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 true
@@ -365,44 +365,44 @@
             "neighbors": [
                 false,
                 true,
-                true,
+                false,
                 true
             ]
         },
         "(3, 8)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
                 false,
+                false,
+                true,
                 true
             ]
         },
         "(3, 9)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 false,
                 true,
-                true
+                false
             ]
         },
         "(4, 0)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
                 false,
+                true,
                 false
             ]
         },
         "(4, 1)": {
             "value": 0,
             "neighbors": [
-                true,
+                false,
                 false,
                 true,
-                true
+                false
             ]
         },
         "(4, 2)": {
@@ -410,7 +410,7 @@
             "neighbors": [
                 false,
                 true,
-                false,
+                true,
                 false
             ]
         },
@@ -419,7 +419,7 @@
             "neighbors": [
                 true,
                 true,
-                true,
+                false,
                 true
             ]
         },
@@ -428,7 +428,7 @@
             "neighbors": [
                 false,
                 false,
-                true,
+                false,
                 true
             ]
         },
@@ -445,27 +445,27 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
                 false,
+                true,
                 false
             ]
         },
         "(4, 7)": {
             "value": 0,
             "neighbors": [
+                false,
                 true,
                 false,
-                false,
-                true
+                false
             ]
         },
         "(4, 8)": {
             "value": 0,
             "neighbors": [
+                true,
                 false,
                 true,
-                true,
-                false
+                true
             ]
         },
         "(4, 9)": {
@@ -474,13 +474,13 @@
                 true,
                 false,
                 false,
-                true
+                false
             ]
         },
         "(5, 0)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 true,
                 false
@@ -498,7 +498,7 @@
         "(5, 2)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 false,
                 false,
                 true
@@ -507,8 +507,8 @@
         "(5, 3)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 false,
                 false
             ]
@@ -516,17 +516,17 @@
         "(5, 4)": {
             "value": 0,
             "neighbors": [
-                true,
+                false,
                 true,
                 false,
-                false
+                true
             ]
         },
         "(5, 5)": {
             "value": 0,
             "neighbors": [
                 true,
-                false,
+                true,
                 true,
                 true
             ]
@@ -534,10 +534,10 @@
         "(5, 6)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
                 false,
-                false
+                false,
+                true
             ]
         },
         "(5, 7)": {
@@ -546,7 +546,7 @@
                 false,
                 false,
                 true,
-                true
+                false
             ]
         },
         "(5, 8)": {
@@ -554,7 +554,7 @@
             "neighbors": [
                 true,
                 false,
-                true,
+                false,
                 false
             ]
         },
@@ -572,7 +572,7 @@
             "neighbors": [
                 true,
                 false,
-                true,
+                false,
                 false
             ]
         },
@@ -590,7 +590,7 @@
             "neighbors": [
                 false,
                 true,
-                false,
+                true,
                 false
             ]
         },
@@ -598,7 +598,7 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
+                true,
                 true,
                 true
             ]
@@ -607,18 +607,18 @@
             "value": 0,
             "neighbors": [
                 false,
+                false,
                 true,
-                true,
-                false
+                true
             ]
         },
         "(6, 5)": {
             "value": 0,
             "neighbors": [
                 true,
+                true,
                 false,
-                false,
-                true
+                false
             ]
         },
         "(6, 6)": {
@@ -626,15 +626,15 @@
             "neighbors": [
                 false,
                 true,
-                false,
-                false
+                true,
+                true
             ]
         },
         "(6, 7)": {
             "value": 0,
             "neighbors": [
                 true,
-                true,
+                false,
                 false,
                 true
             ]
@@ -642,10 +642,10 @@
         "(6, 8)": {
             "value": 0,
             "neighbors": [
-                true,
+                false,
                 true,
                 false,
-                true
+                false
             ]
         },
         "(6, 9)": {
@@ -660,9 +660,9 @@
         "(7, 0)": {
             "value": 0,
             "neighbors": [
+                false,
+                false,
                 true,
-                false,
-                false,
                 false
             ]
         },
@@ -671,16 +671,16 @@
             "neighbors": [
                 false,
                 true,
-                true,
+                false,
                 false
             ]
         },
         "(7, 2)": {
             "value": 0,
             "neighbors": [
+                true,
                 false,
-                false,
-                false,
+                true,
                 true
             ]
         },
@@ -688,8 +688,8 @@
             "value": 0,
             "neighbors": [
                 true,
-                true,
-                true,
+                false,
+                false,
                 false
             ]
         },
@@ -698,15 +698,15 @@
             "neighbors": [
                 true,
                 true,
-                false,
-                true
+                true,
+                false
             ]
         },
         "(7, 5)": {
             "value": 0,
             "neighbors": [
                 false,
-                false,
+                true,
                 false,
                 true
             ]
@@ -714,10 +714,10 @@
         "(7, 6)": {
             "value": 0,
             "neighbors": [
-                false,
-                false,
                 true,
-                false
+                false,
+                false,
+                true
             ]
         },
         "(7, 7)": {
@@ -733,7 +733,7 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
+                true,
                 true,
                 true
             ]
@@ -744,23 +744,23 @@
                 true,
                 false,
                 true,
-                false
+                true
             ]
         },
         "(8, 0)": {
             "value": 0,
             "neighbors": [
+                true,
+                true,
                 false,
-                true,
-                true,
                 false
             ]
         },
         "(8, 1)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
+                false,
+                false,
                 true,
                 true
             ]
@@ -768,17 +768,17 @@
         "(8, 2)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
-                false,
-                true
+                true,
+                true,
+                false
             ]
         },
         "(8, 3)": {
             "value": 0,
             "neighbors": [
-                true,
-                true,
+                false,
+                false,
                 false,
                 true
             ]
@@ -786,10 +786,10 @@
         "(8, 4)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
                 false,
-                true
+                true,
+                false
             ]
         },
         "(8, 5)": {
@@ -798,14 +798,14 @@
                 false,
                 true,
                 false,
-                true
+                false
             ]
         },
         "(8, 6)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 true,
                 true
             ]
@@ -814,18 +814,18 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
-                false
+                false,
+                true
             ]
         },
         "(8, 8)": {
             "value": 0,
             "neighbors": [
                 true,
-                true,
-                true,
-                false
+                false,
+                false,
+                true
             ]
         },
         "(8, 9)": {
@@ -833,15 +833,15 @@
             "neighbors": [
                 true,
                 false,
-                true,
-                true
+                false,
+                false
             ]
         },
         "(9, 0)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 false,
                 false
             ]
@@ -852,13 +852,13 @@
                 true,
                 true,
                 false,
-                false
+                true
             ]
         },
         "(9, 2)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 true
@@ -876,7 +876,7 @@
         "(9, 4)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 false
@@ -903,8 +903,8 @@
         "(9, 7)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 false,
                 true
             ]
@@ -912,19 +912,19 @@
         "(9, 8)": {
             "value": 0,
             "neighbors": [
+                false,
                 true,
                 false,
-                false,
-                false
+                true
             ]
         },
         "(9, 9)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
                 false,
-                false
+                false,
+                true
             ]
         }
     }
