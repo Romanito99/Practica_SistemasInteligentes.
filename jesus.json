@@ -1,6 +1,6 @@
 {
-    "rows": 50,
-    "cols": 50,
+    "rows": 12,
+    "cols": 15,
     "max_n": 4,
     "mov": [
         [
@@ -40,8 +40,8 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
+                false,
                 true
             ]
         },
@@ -49,18 +49,18 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
-                false
+                false,
+                true
             ]
         },
         "(0, 3)": {
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
-                false
+                true,
+                true
             ]
         },
         "(0, 4)": {
@@ -69,7 +69,8 @@
                 false,
                 false,
                 true,
-                false
+                false,
+                true
             ]
         },
         "(0, 5)": {
@@ -78,7 +79,7 @@
                 false,
                 false,
                 true,
-                false
+                true
             ]
         },
         "(0, 6)": {
@@ -94,14 +95,6 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(0, 8)": {
-            "value": 0,
-            "neighbors": [
                 false,
                 true,
                 true,
@@ -139,7 +132,34 @@
             "value": 0,
             "neighbors": [
                 false,
+                true,
                 false,
+                true
+            ]
+        },
+        "(0, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(0, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(0, 12)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
                 false,
                 true
             ]
@@ -148,33 +168,23 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
-                false
+                false,
+                true
             ]
         },
         "(0, 14)": {
             "value": 0,
             "neighbors": [
                 false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(0, 15)": {
-            "value": 0,
-            "neighbors": [
                 false,
                 true,
-                false,
                 true
             ]
         },
-        "(0, 16)": {
+        "(1, 0)": {
             "value": 0,
             "neighbors": [
-                false,
                 false,
                 true,
                 true
@@ -194,15 +204,6 @@
             "neighbors": [
                 false,
                 true,
-                true,
-                false
-            ]
-        },
-        "(0, 19)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
                 false,
                 true
             ]
@@ -211,7 +212,6 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
                 true,
                 true
             ]
@@ -237,7 +237,6 @@
         "(0, 23)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
                 false,
                 false
@@ -249,6 +248,7 @@
                 false,
                 false,
                 true,
+                false,
                 true
             ]
         },
@@ -283,17 +283,8 @@
             "value": 0,
             "neighbors": [
                 false,
-                true,
-                true,
-                true
-            ]
-        },
-        "(0, 29)": {
-            "value": 0,
-            "neighbors": [
                 false,
                 true,
-                false,
                 true
             ]
         },
@@ -309,7 +300,6 @@
         "(0, 31)": {
             "value": 0,
             "neighbors": [
-                false,
                 true,
                 true,
                 false
@@ -321,7 +311,8 @@
                 false,
                 false,
                 false,
-                true
+                false,
+                false
             ]
         },
         "(0, 33)": {
@@ -330,16 +321,8 @@
                 false,
                 true,
                 true,
-                false
-            ]
-        },
-        "(0, 34)": {
-            "value": 0,
-            "neighbors": [
-                false,
                 true,
-                false,
-                true
+                false
             ]
         },
         "(0, 35)": {
@@ -354,16 +337,24 @@
         "(0, 36)": {
             "value": 0,
             "neighbors": [
+                true,
                 false,
+                false,
+                true
+            ]
+        },
+        "(1, 8)": {
+            "value": 0,
+            "neighbors": [
+                true,
                 false,
                 true,
                 false
             ]
         },
-        "(0, 37)": {
+        "(1, 9)": {
             "value": 0,
             "neighbors": [
-                false,
                 false,
                 true,
                 false
@@ -374,51 +365,61 @@
             "neighbors": [
                 false,
                 true,
+                false
+            ]
+        },
+        "(1, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(1, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
                 true,
                 false
             ]
         },
-        "(0, 39)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(0, 40)": {
+        "(1, 12)": {
             "value": 0,
             "neighbors": [
                 false,
                 true,
-                true,
+                false,
                 false
             ]
         },
-        "(0, 41)": {
+        "(1, 13)": {
             "value": 0,
             "neighbors": [
                 false,
                 true,
-                false,
-                true
-            ]
-        },
-        "(0, 42)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
                 true,
                 true
             ]
         },
-        "(0, 43)": {
+        "(1, 14)": {
             "value": 0,
             "neighbors": [
                 false,
+                false,
                 true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(2, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
                 true,
                 false
             ]
@@ -21794,20 +21795,29 @@
             "neighbors": [
                 false,
                 true,
-                true,
-                true
+                false,
+                false
             ]
         },
         "(48, 19)": {
             "value": 0,
             "neighbors": [
-                true,
                 false,
+                true,
                 true,
                 true
             ]
         },
         "(48, 20)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(48, 21)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -21816,21 +21826,12 @@
                 false
             ]
         },
-        "(48, 21)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
         "(48, 22)": {
             "value": 0,
             "neighbors": [
                 true,
                 false,
-                true,
+                false,
                 true
             ]
         },
@@ -21838,7 +21839,7 @@
             "value": 0,
             "neighbors": [
                 true,
-                true,
+                false,
                 false,
                 false
             ]
@@ -21848,14 +21849,13 @@
             "neighbors": [
                 false,
                 true,
-                true,
-                true
+                false,
+                false
             ]
         },
         "(48, 25)": {
             "value": 0,
             "neighbors": [
-                true,
                 true,
                 true,
                 true
@@ -21865,12 +21865,28 @@
             "value": 0,
             "neighbors": [
                 false,
-                false,
                 true,
-                true
+                false
             ]
         },
-        "(48, 27)": {
+        "(2, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(2, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false
+            ]
+        },
+        "(2, 12)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -21879,30 +21895,58 @@
                 false
             ]
         },
-        "(48, 28)": {
+        "(2, 13)": {
             "value": 0,
             "neighbors": [
+                true,
+                true,
+                true,
+                true
+            ]
+        },
+        "(2, 14)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(3, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
                 true,
                 false,
                 true,
                 true
             ]
         },
-        "(48, 29)": {
+        "(3, 1)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(3, 2)": {
             "value": 0,
             "neighbors": [
                 true,
                 false,
-                false,
+                true,
                 false
             ]
         },
-        "(48, 30)": {
+        "(3, 3)": {
             "value": 0,
             "neighbors": [
+                true,
                 false,
-                true,
-                true,
+                false,
                 false
             ]
         },
@@ -21912,46 +21956,19 @@
                 false,
                 true,
                 false,
-                true
+                false
             ]
         },
-        "(48, 32)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(48, 33)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(48, 34)": {
+        "(3, 5)": {
             "value": 0,
             "neighbors": [
                 false,
-                true,
+                false,
                 true,
                 true
             ]
         },
-        "(48, 35)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                true
-            ]
-        },
-        "(48, 36)": {
+        "(3, 6)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -21960,16 +21977,7 @@
                 false
             ]
         },
-        "(48, 37)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                false
-            ]
-        },
-        "(48, 38)": {
+        "(3, 7)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -21978,88 +21986,43 @@
                 true
             ]
         },
-        "(48, 39)": {
+        "(3, 8)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 true,
                 false,
                 true
             ]
         },
-        "(48, 40)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                true
-            ]
-        },
-        "(48, 41)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(48, 42)": {
+        "(3, 9)": {
             "value": 0,
             "neighbors": [
                 true,
                 true,
-                false,
-                false
-            ]
-        },
-        "(48, 43)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
                 false,
                 true
             ]
         },
-        "(48, 44)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(48, 45)": {
+        "(3, 10)": {
             "value": 0,
             "neighbors": [
                 true,
-                false,
+                true,
                 false,
                 true
             ]
         },
-        "(48, 46)": {
+        "(3, 11)": {
             "value": 0,
             "neighbors": [
-                false,
+                true,
                 false,
                 true,
-                false
+                true
             ]
         },
-        "(48, 47)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(48, 48)": {
+        "(3, 12)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22068,70 +22031,16 @@
                 false
             ]
         },
-        "(48, 49)": {
+        "(3, 13)": {
             "value": 0,
             "neighbors": [
                 true,
-                false,
+                true,
                 true,
                 true
             ]
         },
-        "(49, 0)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 1)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 2)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 3)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 6)": {
+        "(3, 14)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22140,7 +22049,7 @@
                 true
             ]
         },
-        "(49, 7)": {
+        "(4, 0)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22149,61 +22058,25 @@
                 false
             ]
         },
-        "(49, 8)": {
+        "(4, 1)": {
             "value": 0,
             "neighbors": [
                 true,
-                true,
                 false,
+                true,
                 false
             ]
         },
-        "(49, 9)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 10)": {
+        "(4, 2)": {
             "value": 0,
             "neighbors": [
                 true,
-                true,
                 false,
+                true,
                 false
             ]
         },
-        "(49, 11)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 12)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 13)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 14)": {
+        "(4, 3)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22212,7 +22085,16 @@
                 false
             ]
         },
-        "(49, 15)": {
+        "(4, 4)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(4, 5)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22221,25 +22103,16 @@
                 true
             ]
         },
-        "(49, 16)": {
+        "(4, 6)": {
             "value": 0,
             "neighbors": [
                 true,
+                false,
                 true,
-                false,
                 true
             ]
         },
-        "(49, 17)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 18)": {
+        "(4, 7)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22248,43 +22121,16 @@
                 false
             ]
         },
-        "(49, 19)": {
+        "(4, 8)": {
             "value": 0,
             "neighbors": [
+                false,
                 true,
-                false,
-                false,
+                true,
                 false
             ]
         },
-        "(49, 20)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 21)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 22)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 23)": {
+        "(4, 9)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22293,52 +22139,7 @@
                 true
             ]
         },
-        "(49, 24)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(49, 25)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(49, 26)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 27)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 28)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(49, 29)": {
+        "(4, 10)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22347,7 +22148,7 @@
                 false
             ]
         },
-        "(49, 30)": {
+        "(4, 11)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22356,16 +22157,97 @@
                 true
             ]
         },
-        "(49, 31)": {
+        "(4, 12)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                true
+            ]
+        },
+        "(4, 13)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false
+            ]
+        },
+        "(4, 14)": {
             "value": 0,
             "neighbors": [
                 false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(5, 0)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(5, 1)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false
+            ]
+        },
+        "(5, 2)": {
+            "value": 0,
+            "neighbors": [
+                true,
                 false,
                 false,
                 true
             ]
         },
-        "(49, 32)": {
+        "(5, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(5, 4)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                false
+            ]
+        },
+        "(5, 5)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(5, 6)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                true
+            ]
+        },
+        "(5, 7)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22374,16 +22256,7 @@
                 false
             ]
         },
-        "(49, 33)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 34)": {
+        "(5, 8)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22392,88 +22265,16 @@
                 true
             ]
         },
-        "(49, 35)": {
+        "(5, 9)": {
             "value": 0,
             "neighbors": [
                 false,
                 false,
-                false,
+                true,
                 true
             ]
         },
-        "(49, 36)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 37)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 38)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 39)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 40)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(49, 41)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(49, 42)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 43)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(49, 44)": {
+        "(5, 10)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22482,7 +22283,7 @@
                 false
             ]
         },
-        "(49, 45)": {
+        "(5, 11)": {
             "value": 0,
             "neighbors": [
                 false,
@@ -22491,25 +22292,7 @@
                 true
             ]
         },
-        "(49, 46)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 47)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(49, 48)": {
+        "(5, 12)": {
             "value": 0,
             "neighbors": [
                 true,
@@ -22518,7 +22301,829 @@
                 true
             ]
         },
-        "(49, 49)": {
+        "(5, 13)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(5, 14)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                false
+            ]
+        },
+        "(6, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                false
+            ]
+        },
+        "(6, 1)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false
+            ]
+        },
+        "(6, 2)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(6, 3)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(6, 4)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(6, 5)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(6, 6)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(6, 7)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(6, 8)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(6, 9)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(6, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(6, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                false
+            ]
+        },
+        "(6, 12)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(6, 13)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(6, 14)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(7, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                false
+            ]
+        },
+        "(7, 1)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                false
+            ]
+        },
+        "(7, 2)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false
+            ]
+        },
+        "(7, 3)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(7, 4)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(7, 5)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(7, 6)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(7, 7)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(7, 8)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(7, 9)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(7, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(7, 11)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(7, 12)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(7, 13)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(7, 14)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(8, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(8, 1)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                true
+            ]
+        },
+        "(8, 2)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(8, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        "(8, 4)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(8, 5)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(8, 6)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(8, 7)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true,
+                true
+            ]
+        },
+        "(8, 8)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false
+            ]
+        },
+        "(8, 9)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(8, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(8, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                false
+            ]
+        },
+        "(8, 12)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(8, 13)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(8, 14)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(9, 0)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                false
+            ]
+        },
+        "(9, 1)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true
+            ]
+        },
+        "(9, 2)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(9, 3)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(9, 4)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(9, 5)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(9, 6)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(9, 7)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false
+            ]
+        },
+        "(9, 8)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(9, 9)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                true
+            ]
+        },
+        "(9, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(9, 11)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                false
+            ]
+        },
+        "(9, 12)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+        "(9, 13)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(9, 14)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(10, 0)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(10, 1)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(10, 2)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(10, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(10, 4)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false
+            ]
+        },
+        "(10, 5)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                false
+            ]
+        },
+        "(10, 6)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                true,
+                false
+            ]
+        },
+        "(10, 7)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(10, 8)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(10, 9)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                true,
+                true
+            ]
+        },
+        "(10, 10)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                false
+            ]
+        },
+        "(10, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(10, 12)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(10, 13)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                true,
+                true
+            ]
+        },
+        "(10, 14)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(11, 0)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(11, 1)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 2)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(11, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(11, 4)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 5)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 6)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(11, 7)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                false
+            ]
+        },
+        "(11, 8)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 9)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 10)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 11)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                false,
+                true
+            ]
+        },
+        "(11, 12)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                true,
+                false,
+                true
+            ]
+        },
+        "(11, 13)": {
+            "value": 0,
+            "neighbors": [
+                true,
+                false,
+                false,
+                true
+            ]
+        },
+        "(11, 14)": {
             "value": 0,
             "neighbors": [
                 true,

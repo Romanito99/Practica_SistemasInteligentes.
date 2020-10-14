@@ -29,8 +29,9 @@ class Laberinto(object):
                 self.celdas.append(neighbors)
             
         else:
-            self.filas=50
-            self.columnas=50
+            self.filas=12
+            
+            self.columnas=15
             #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
 
@@ -214,9 +215,9 @@ class Laberinto(object):
         casillas=[]
         i=0
         j=0
-        while i<self.columnas:
+        while i<self.filas:
             t=(i,0)
-            while j<self.filas:
+            while j<self.columnas:
                 t=(i,j)
                 casilla=Casilla(t,0)
                 tuplas.append(t)
@@ -270,7 +271,8 @@ class Laberinto(object):
     def dibujar(self,casillas):
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
         
-        plt.axvspan(-0.1, self.columnas, facecolor='black', alpha=2)
+        plt.axvspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
+        plt.axvspan(-0.1, self.filas+0.1, facecolor='black', alpha=2)
         plt.ylim(self.filas+0.1,-0.1)
         plt.xlim(-0.1,self.columnas+0.1)
         plt.style.use('dark_background')
