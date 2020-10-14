@@ -30,7 +30,7 @@ class Laberinto(object):
             
         else:
             self.filas=4
-            self.columnas=10
+            self.columnas=8
             #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
 
@@ -38,9 +38,9 @@ class Laberinto(object):
         while(len(no_visitados)!=0):
             x=[]
            
-            casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
+            casilla_actual=(randint(0,self.columnas-1),randint(0,self.filas-1))
             while(casilla_actual in visitados):
-                casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
+                casilla_actual=(randint(0,self.columnas-1),randint(0,self.filas-1))
             camino.append(casilla_actual)
             print(casilla_actual)
             no_visitados.remove(casilla_actual)
@@ -180,8 +180,8 @@ class Laberinto(object):
 
             if(f2==-1): 
                 casillas[i].set_N(True)
-                casillas[i-self.columnas].set_S(True)
-                variable=(i-self.columnas)
+                casillas[i-self.filas].set_S(True)
+                
                
                 
                 
@@ -189,7 +189,7 @@ class Laberinto(object):
                    
             if(f2==1):
                 casillas[i].set_S(True)
-                casillas[i+self.columnas].set_N(True)
+                casillas[i+self.filas].set_N(True)
                 
                 #sleep(10)
             if(c2==-1):
@@ -235,8 +235,11 @@ class Laberinto(object):
         visitados=[]
         casillas=[]
         no_visitados,casillas=self.generar_tuplas()
-        casilla_destino=(randint(0,self.filas-1),randint(0,self.columnas-1))
+        casilla_destino=(randint(0,self.columnas-1),randint(0,self.filas-1))
+        print(casilla_destino)
+        print(no_visitados)
         visitados.append(casilla_destino)
+        print(visitados)
         no_visitados.remove(casilla_destino)
         
        
@@ -269,11 +272,11 @@ class Laberinto(object):
         return numero
 
     def dibujar(self,casillas):
-        plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
+        plt.figure(figsize=(self.columnas+0.1, self.filas+0.1))
         
         plt.axvspan(-0.1, self.columnas, facecolor='black', alpha=2)
-        plt.ylim(self.filas+0.1,-0.1)
-        plt.xlim(-0.1,self.columnas+0.1)
+        plt.ylim(self.columnas+0.1,-0.1)
+        plt.xlim(-0.1,self.filas+0.1)
         plt.style.use('dark_background')
         for i in casillas:
             
