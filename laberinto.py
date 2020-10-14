@@ -29,8 +29,7 @@ class Laberinto(object):
                 self.celdas.append(neighbors)
             
         else:
-            self.filas=12
-            
+            self.filas=20
             self.columnas=15
             #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
@@ -43,6 +42,7 @@ class Laberinto(object):
             while(casilla_actual in visitados):
                 casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
             camino.append(casilla_actual)
+            print(casilla_actual)
             no_visitados.remove(casilla_actual)
         
             
@@ -328,7 +328,7 @@ class Laberinto(object):
             data['cells'].update(dicc_cells)
 
 
-        with open("jesus.json", "w") as f:
+        with open("laberinto.json", "w") as f:
             json.dump(data, f,indent=4)
 
 a=Laberinto(4,4)
