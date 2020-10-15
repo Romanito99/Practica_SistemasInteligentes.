@@ -5,32 +5,18 @@ from casilla import Casilla
 import matplotlib.pyplot as plt
 
 class Laberinto(object):
-    def __init__(self,fichero_json=None,*args,**kwargs):
-        if (len(args)!=1):
-            try:
-                with open(fichero_json) as f:
-                    datos=f.read()
-                datos=json.loads(datos)
-            except:
-                print("No se ha podido leer el fichero json")
-            self.filas=datos["rows"]
-            self.columnas=datos["cols"]
-            self.max_nmax_n=datos["max_n"]
-            self.mov=datos["mov"]
-            self.id_mov=datos["id_mov"]
-            self.cells=datos["cells"]
-            self.value=[]
-            self.celdas=[]
-            for entity in self.cells:
-                entityName = entity #(0, 0)  (0, 1) 
-                v=self.cells[entityName]["value"]
-                neighbors=self.cells[entityName]["neighbors"]
-                self.value.append(v)
-                self.celdas.append(neighbors)
+    def __init__(self,*args,**kwargs):
+        self.prueba=2
+        if (len(args)==1):
+           self.read_json(args[0])
             
         else:
-            self.filas=20
-            self.columnas=15
+            self.filas=args[0]
+            self.columnas=args[1]
+            self.casillas=self.tablero()
+            self.to_json(self.casillas)
+
+        self.dibujar(self.casillas)
             #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
             
 
@@ -42,7 +28,6 @@ class Laberinto(object):
             while(casilla_actual in visitados):
                 casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
             camino.append(casilla_actual)
-            print(casilla_actual)
             no_visitados.remove(casilla_actual)
         
             
@@ -213,6 +198,7 @@ class Laberinto(object):
     def generar_tuplas(self):
         tuplas=[]
         casillas=[]
+        self.prueba=3
         i=0
         j=0
         while i<self.filas:
@@ -301,7 +287,7 @@ class Laberinto(object):
             else:
                 plt.plot([f,f],[c,c+1],color='dimgray',linestyle="--")
         
-        plt.savefig("laberinto.png")
+        plt.savefig("laberinto2.png")
 
     def to_json(self,casillas):
         data={}
@@ -331,7 +317,41 @@ class Laberinto(object):
         with open("laberinto.json", "w") as f:
             json.dump(data, f,indent=4)
 
-a=Laberinto(4,4)
-lista=a.tablero()
-a.to_json(lista)
-a.dibujar(lista)
+    def read_json(self,fichero_json):
+        try:
+            with open(fichero_json) as f:
+                datos=f.read()
+            datos=json.loads(datos)
+        except:
+            print("No se ha podido leer el fichero json")
+        else:
+            self.filas=datos["rows"]
+            self.columnas=datos["cols"]
+            self.max_nmax_n=datos["max_n"]
+            self.mov=datos["mov"]
+            self.id_mov=datos["id_mov"]
+            self.cells=datos["cells"]
+            self.casillas=[]
+            for entity in self.cells: 
+                print(entity)
+                valor1=entity.split(',')[0].split('(')[1]
+                print(valor1)
+                print(entity.split(',')[1])
+                valor2=entity.split(',')[1].split(')')[0]
+                print(valor2)
+                tupla=(int(valor1),int(valor2))
+                print(tupla)
+                v=self.cells[entity]["value"]
+                neighbors=self.cells[entity]["neighbors"]
+                #En un futuro debemos splitear y convertir en int a value
+                casilla=Casilla(tupla,v)
+               
+                casilla.set_N(neighbors[0])
+                casilla.set_E(neighbors[1])
+                casilla.set_S(neighbors[2])
+                casilla.set_O(neighbors[3])
+                self.casillas.append(casilla)
+
+a=Laberinto("laberinto.json")
+
+
