@@ -1,5 +1,4 @@
 import json
-from time import sleep
 from random import randint
 from casilla import Casilla
 import matplotlib.pyplot as plt
@@ -22,9 +21,6 @@ class Laberinto(object):
             self.dibujar(self.casillas)
 
 
-            #self.tablero,self.casillas=self.generar_tuplas(self.filas,self.columnas)
-
-
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
         while(len(no_visitados)!=0):
             x=[]
@@ -41,8 +37,6 @@ class Laberinto(object):
                 f,c=casilla_actual
                 movimiento=self.movimiento_random(f,c)
                 if(movimiento==0):
-
-                    #sleep(2)
                     if  ((f-1,c) in no_visitados): #Norte
 
                         casilla_actual=(f-1,c)
@@ -53,7 +47,6 @@ class Laberinto(object):
 
                     else:
                         if(f-1,c) in camino:
-                            #print("entro a camino")
                             n=camino.index((f-1,c))
                             x=camino[n+1:]
                             no_visitados.extend(x)
@@ -62,7 +55,6 @@ class Laberinto(object):
 
                             casilla_actual=(f-1,c)
                         elif (f-1,c) in visitados:
-                            #print("entro a visitado")
                             casilla_actual=(f-1,c)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
@@ -80,7 +72,6 @@ class Laberinto(object):
 
                     else:
                         if(f,c+1) in camino:
-                            #print("entro a camino")
                             n=camino.index((f,c+1))
                             x=camino[n+1:]
                             no_visitados.extend(x)
@@ -120,8 +111,6 @@ class Laberinto(object):
                             camino,casillas,visitados=self.excavar(camino,visitados,casillas)
 
                 elif(movimiento==3):
-
-                    #sleep(2)
                     if ((f,c-1) in no_visitados): #Este
 
                         casilla_actual=(f,c-1)
@@ -172,28 +161,17 @@ class Laberinto(object):
                 casillas[i].set_N(True)
                 casillas[i-self.columnas].set_S(True)
                 variable=(i-self.columnas)
-
-
-
-                #sleep(10)
-
             if(f2==1):
                 casillas[i].set_S(True)
                 casillas[i+self.columnas].set_N(True)
-
-                #sleep(10)
             if(c2==-1):
                 casillas[i].set_O(True)
                 casillas[i-1].set_E(True)
                 visitado=i-1
-
-                #sleep(10)
-
             if(c2==1):
                 casillas[i].set_E(True)
                 casillas[i+1].set_O(True)
 
-                #sleep(10)
             n+=1
 
         visitados.extend(camino)
@@ -270,7 +248,6 @@ class Laberinto(object):
         for i in casillas:
 
             c,f=i.get_tupla()
-            #sleep(5)
             if (i.get_S()==False):
 
                 plt.plot([f,f+1],[c+1,c+1],color='white',linewidth=3.0)
@@ -338,14 +315,9 @@ class Laberinto(object):
             self.cells=datos["cells"]
             self.casillas=[]
             for entity in self.cells:
-                print(entity)
                 valor1=entity.split(',')[0].split('(')[1]
-                print(valor1)
-                print(entity.split(',')[1])
                 valor2=entity.split(',')[1].split(')')[0]
-                print(valor2)
                 tupla=(int(valor1),int(valor2))
-                print(tupla)
                 v=self.cells[entity]["value"]
                 neighbors=self.cells[entity]["neighbors"]
                 #En un futuro debemos splitear y convertir en int a value
@@ -406,7 +378,7 @@ class Laberinto(object):
 
 
 
-a=Laberinto("laberinto.json")
+a=Laberinto("prueba.json")
 
 
 
