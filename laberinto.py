@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
+        '''Metodo constructor de la clase laberinto'''
+
         self.prueba=2
         if (len(args)==1):
             self.read_json(args[0])
@@ -22,6 +24,8 @@ class Laberinto(object):
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
+        '''En este metodo se realiza el algoritmo de Wilson'''
+
         while(len(no_visitados)!=0):
             x=[]
 
@@ -137,6 +141,7 @@ class Laberinto(object):
         return casillas
 
     def excavar(self,camino,visitados,casillas):
+        '''Metodo que nos "excava" el camino escogido'''
         n=0
         while(n<(len(camino)-1)):
             f0,c0=camino[n]
@@ -179,6 +184,7 @@ class Laberinto(object):
         return camino,casillas,visitados
 
     def generar_tuplas(self):
+        ''' Generamos las tuplas (coordenadas) y sus respectivos objetos casilla'''
         tuplas=[]
         casillas=[]
         self.prueba=3
@@ -200,6 +206,7 @@ class Laberinto(object):
 
 
     def tablero(self):
+        '''Metodo principal que usamos para llamar al resto'''
         camino=[]
         visitados=[]
         casillas=[]
@@ -215,7 +222,7 @@ class Laberinto(object):
 
 
     def movimiento_random(self,filas,columnas):
-
+        '''Movimiento aleatorio para decidir si vamos al N,E,S o O'''
         lista_movimientos=[0,1,2,3]
 
         if (filas==0):
@@ -238,6 +245,8 @@ class Laberinto(object):
         return numero
 
     def dibujar(self,casillas):
+        '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
+
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
 
         plt.axvspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
@@ -269,9 +278,11 @@ class Laberinto(object):
             else:
                 plt.plot([f,f],[c,c+1],color='dimgray',linestyle="--")
 
-        plt.savefig("laberinto2.png")
+        plt.savefig("laberinto.png")
 
     def to_json(self,casillas):
+        '''Se construye el json con la lista de casillas y sus atributos'''
+
         data={}
         tupla=""
         neighbours=''
@@ -330,7 +341,7 @@ class Laberinto(object):
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
-
+        ''' En este metodo se comprueba la integridad del fichero json'''
 
         for i in self.casillas:
             f,c = i.get_tupla()
@@ -378,7 +389,7 @@ class Laberinto(object):
 
 
 
-a=Laberinto("prueba.json")
+a=Laberinto(4,4)
 
 
 
