@@ -1,4 +1,4 @@
-import json
+qqimport json
 from time import sleep
 from random import randint
 from casilla import Casilla
