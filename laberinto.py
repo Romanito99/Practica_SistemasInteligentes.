@@ -155,10 +155,6 @@ class Laberinto(object):
                     encontrado=True
                 else:
                     i+=1
-
-
-
-
             f2=f1-f0
             c2=c1-c0
 
@@ -389,7 +385,4 @@ class Laberinto(object):
 
 
 
-a=Laberinto(4,4)
-
-
-
+a=Laberinto(10,10)
