@@ -13,62 +13,45 @@ class Busqueda():
         with open('problema.json','w') as f:
             json.dump(data, f, indent=4)
         
-    def creacion_sucesores(self,estados):
+    def creacion_sucesores(self,estado,numero,filas,columnas):
+        f,c =estado.get_tupla()
         funcion_sucesores=[]
         sucesores=[]
-        for i in estados:
-            f,c = i.get_tupla()
-            if f==0:
-                if i.get_N()==True:
-                    
-                    
-                j=self.casillas.index(i)+self.columnas
-                if i.get_S()!=self.casillas[j].get_N():
-                    return True
-            elif f==self.filas-1:
-                if i.get_S()==True:
-                    return True
-                j=self.casillas.index(i)-self.columnas
-                if i.get_N()!=self.casillas[j].get_S():
-                    return True
-            else:
-                j=self.casillas.index(i)+self.columnas
-                if i.get_S()!=self.casillas[j].get_N():
-                    return True
-                j=self.casillas.index(i)-self.columnas
-                if i.get_N()!=self.casillas[j].get_S():
-                    return True
-            if c==0:
-                if i.get_O()==True:
-                    return True
-                j=self.casillas.index(i)+1
-                if i.get_E()!=self.casillas[j].get_O():
-                    return True
-            elif c==self.columnas-1:
-                if i.get_E()==True:
-                    return True
-                j=self.casillas.index(i)-1
-                if i.get_O()!=self.casillas[j].get_E():
-                    return True
-            else:
-                j=self.casillas.index(i)+1
-                if i.get_E()!=self.casillas[j].get_O():
-                    return True
-                j=self.casillas.index(i)-1
-                if i.get_O()!=self.casillas[j].get_E():
-                    return True
-            funcion_sucesores.append(sucesores)
-        return funcion_sucesores
 
+        if (f==0):
+            sucesores=['S', (f+1,c), 1] 
+            funcion_sucesores.append(sucesores)
+        elif (f==filas-1):
+            sucesores=['N', (f-1,c), 1] 
+            funcion_sucesores.append(sucesores) 
+        else:
+            sucesores=['N', (f-1,c), 1]
+            funcion_sucesores.append(sucesores) 
+            sucesores=['S', (f+1,c), 1] 
+            funcion_sucesores.append(sucesores)
+
+        if (c==0):
+            sucesores=['O', (f,c+1), 1]
+            funcion_sucesores.append(sucesores)
+        elif (c==columnas-1):
+            sucesores=['E', (f,c-1), 1]
+            funcion_sucesores.append(sucesores)
+        else:
+            sucesores=['O', (f,c+1), 1]
+            funcion_sucesores.append(sucesores)
+            sucesores=['E', (f,c-1), 1]
+            funcion_sucesores.append(sucesores)
+
+        return funcion_sucesores
 
         
 
     def generar_estados(self, casillas):
         estados=[]
         for i in casillas:
-            tupla=i.get_tupla()
+            f,c=i.get_tupla()
             valor=i.get_valor()
-            estado=Estado(tupla,valor)
+            estado=Estado((f,c),valor)
             estados.append(estado)
         return estados
 
