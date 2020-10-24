@@ -1,5 +1,5 @@
 from casilla import Casilla 
-class estado(object):
+class Estado(object):
     def __init__(self,tupla,valor,vecinos=[]):
         Casilla.__init__(self,tupla,valor)
         self.vecinos=vecinos
