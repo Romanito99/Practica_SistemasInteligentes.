@@ -15,6 +15,18 @@ class Busqueda():
 
         with open('problema.json','w') as f:
             json.dump(data, f, indent=4)
+
+    def readjson(self,fichero_json):
+        try:
+            with open(fichero_json) as f:
+                datos=f.read()
+            datos=json.loads(datos)
+        except:
+            print("No se ha podido leer el fichero json de busqueda")
+        else:
+            initial=datos['INITIAL']
+            objetive=datos['OBJETIVE']
+            maze=datos['MAZE']
         
     def creacion_sucesores(self,estado, lista_movimiento):
         f,c =estado.get_tupla()
