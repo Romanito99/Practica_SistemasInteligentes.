@@ -161,14 +161,12 @@ class Laberinto(object):
             if(f2==-1):
                 casillas[i].set_N(True)
                 casillas[i-self.columnas].set_S(True)
-                variable=(i-self.columnas)
             if(f2==1):
                 casillas[i].set_S(True)
                 casillas[i+self.columnas].set_N(True)
             if(c2==-1):
                 casillas[i].set_O(True)
                 casillas[i-1].set_E(True)
-                visitado=i-1
             if(c2==1):
                 casillas[i].set_E(True)
                 casillas[i+1].set_O(True)
