@@ -26,7 +26,8 @@ class Laberinto(object):
             self.to_json(self.casillas)
             self.dibujar(self.casillas)
 
-        self.problema()
+        estado=self.problema()
+        print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
@@ -367,36 +368,32 @@ class Laberinto(object):
         return False
 
     def problema(self):
+        circuitofinal=[]
         b=Busqueda()
         frontera= queue.Queue()
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
         estado_inicial,estado_objetivo=b.readjson("prueba.json")
-        print(estado_inicial)
-        #estado_inicial=(0,0)
-        #estado_objetivo=(8,2)
+        
         estado_inicial=b.conversion_estado(estado_inicial,estados)
         estado_objetivo=b.conversion_estado(estado_objetivo,estados)
         
         funcion_sucesores.append(estado_inicial)
-        print("lista",funcion_sucesores)
+        
         lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, 0, 0, None ,0,0)
         
         estado=estado_inicial
+        frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         while(b.objetivo(estado_objetivo,estado)!=True):
-            for i in lista_nodos:
-                
-                frontera.put(i)
             nodo=frontera.get()
-           
+            circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)
-            
             lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, id, costo, estado,heuristica,profundidad)
-            frontera=b.reorden_frontera(frontera, lista_nodos)
-            print("reorden",lista_nodos)
-            sleep(10)
+            frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
+            
+        return estado  
 
 
 
-a=Laberinto(10,10)
+a=Laberinto("laberinto.json")
