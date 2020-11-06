@@ -2,7 +2,7 @@ import json
 from estado import Estado
 from casilla import Casilla
 from nodo import Nodo
-import queue
+
 
 class Busqueda():
     def tojson(self,laberinto_json,inicial,objetivo):
@@ -15,7 +15,22 @@ class Busqueda():
 
         with open('problema.json','w') as f:
             json.dump(data, f, indent=4)
-        
+
+    def readjson(self,fichero_json):
+        try:
+            with open(fichero_json) as f:
+                datos=f.read()
+            datos=json.loads(datos)
+        except:
+            print("No se ha podido leer el fichero json de busqueda")
+        else:
+            initial=datos['INITIAL']
+            objetive=datos['OBJETIVE']
+            maze=datos['MAZE']
+            print(initial)
+
+        return initial,objetive 
+
     def creacion_sucesores(self,estado):
         f,c =estado.get_tupla()
         funcion_sucesores=[]
@@ -35,6 +50,12 @@ class Busqueda():
                 sucesores=['O', (f,c-1), 1]
                 funcion_sucesores.append(sucesores)
         return funcion_sucesores
+    
+    def nodo_a_estado(self, nodo, estados):
+        for i in estados:
+            if(nodo.get_id_estado==i.get_tupla()):
+                return i
+
 
     def generar_vecinos(self,estado):
         f,c=estado.get_tupla()
@@ -121,10 +142,14 @@ class Busqueda():
     def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad):
         lista_nodos=[]
         for i in funcion_sucesores:
+            print(i[1])
             id_estado= i[1]
             accion=i[0]
             valor=i[2]
-            id_padre= estado.get_tupla()
+            if(id!=0):
+                id_padre= estado.get_tupla()
+            else:
+                id_padre=None
             id+=1
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
             lista_nodos.append(nodo)
@@ -133,19 +158,16 @@ class Busqueda():
         
         return lista_nodos,id, costo, profundidad, heuristica, valor
 
-    def problema(self, objetivo, estado_inicial):
-        frontera= queue.PriorityQueue()
-        funcion_sucesores=[]
-        #funcion_sucesores.append(estado_inicial)
-        lista_nodos,id,costo, profundidad,heuristica,valor=self.creacion_nodo(funcion_sucesores,0,0,['',(),1],0,1)
-        frontera.put(lista_nodos)
-        while(objetivo()!=True):
-            lista_movimiento=self.movimiento_permitido(4,4,estado)
-            funcion_sucesores=self.creacion_sucesores(estado, lista_movimiento)
-            lista_nodos, id, costo=self.creacion_nodo(funcion_sucesores, id, costo, estado)
-            frontera=self.reorden_frontera(frontera, lista_nodos)
-            nodo_siguiente=frontera.get()
-            costo+=nodo_siguiente.get_costo()
+    def conversion_estado(self, estado, estados):
+        for i in estados:
+            if(estado==i.get_tupla()):
+                return i
+        
+    def objetivo(self, estado_objetivo,estado):
+        if(estado_objetivo==estado):
+            return True
+        
+    
 
 
     

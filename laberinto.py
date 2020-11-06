@@ -2,11 +2,13 @@ import json
 from random import randint
 from casilla import Casilla
 import matplotlib.pyplot as plt
+from busqueda import Busqueda
+import queue
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
         '''Metodo constructor de la clase laberinto'''
-
+        
         self.prueba=2
         if (len(args)==1):
             self.read_json(args[0])
@@ -21,6 +23,8 @@ class Laberinto(object):
             self.casillas=self.tablero()
             self.to_json(self.casillas)
             self.dibujar(self.casillas)
+
+        self.problema()
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
@@ -46,17 +50,12 @@ class Laberinto(object):
                         casilla_actual=(f-1,c)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-
-
-
                     else:
                         if(f-1,c) in camino:
                             n=camino.index((f-1,c))
                             x=camino[n+1:]
                             no_visitados.extend(x)
                             camino=camino[:n+1]
-
-
                             casilla_actual=(f-1,c)
                         elif (f-1,c) in visitados:
                             casilla_actual=(f-1,c)
@@ -67,13 +66,9 @@ class Laberinto(object):
                 elif(movimiento==1):
 
                     if ((f,c+1) in no_visitados): #Este
-
                         casilla_actual=(f,c+1)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-
-
-
                     else:
                         if(f,c+1) in camino:
                             n=camino.index((f,c+1))
@@ -90,15 +85,10 @@ class Laberinto(object):
                             camino,casillas,visitados= self.excavar(camino,visitados,casillas)
 
                 elif (movimiento==2):
-
                     if  ((f+1,c) in no_visitados): #sur
-
                         casilla_actual=(f+1,c)
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
-
-
-
                     else:
                         if(f+1,c) in camino:
 
@@ -116,24 +106,19 @@ class Laberinto(object):
 
                 elif(movimiento==3):
                     if ((f,c-1) in no_visitados): #Este
-
                         casilla_actual=(f,c-1)
-
                         camino.append(casilla_actual)
                         no_visitados.remove(casilla_actual)
 
-
-
                     else:
                         if(f,c-1) in camino:
-
                             n=camino.index((f,c-1))
                             x=camino[n+1:]
                             no_visitados.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f,c-1)
-                        elif (f,c-1) in visitados:
 
+                        elif (f,c-1) in visitados:
                             casilla_actual=(f,c-1)
                             visitados.remove(casilla_actual)
                             camino.append(casilla_actual)
@@ -379,7 +364,29 @@ class Laberinto(object):
                     return True
         return False
 
-
+    def problema(self):
+        b=Busqueda()
+        frontera= queue.PriorityQueue()
+        funcion_sucesores=[]
+        estados=b.generar_estados(self.casillas)
+        #estado_inicial,estado_objetivo=b.readjson("prueba.json")
+        estado_inicial=(0,0)
+        estado_objetivo=(8,2)
+        estado_inicial=b.conversion_estado(estado_inicial,estados)
+        estado_objetivo=b.conversion_estado(estado_objetivo,estados)
+        funcion_sucesores.append(estado_inicial)
+        costo=0
+        profundidad=0
+        heuristica=0
+        id=0
+        estado=estado_inicial
+        while(b.objetivo(estado_objetivo,estado)!=True):
+            frontera.put(lista_nodos)
+            nodo=frontera.get()
+            estado=b.nodo_a_estado(nodo,estados)
+            funcion_sucesores=b.creacion_sucesores(estado)
+            lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, id, costo, estado,heuristica,profundidad)
+            frontera=b.reorden_frontera(frontera, lista_nodos)
 
 
 
