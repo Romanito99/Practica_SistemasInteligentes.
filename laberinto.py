@@ -3,7 +3,9 @@ from random import randint
 from casilla import Casilla
 import matplotlib.pyplot as plt
 from busqueda import Busqueda
+from nodo import Nodo
 import queue
+from time import sleep
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
@@ -366,27 +368,34 @@ class Laberinto(object):
 
     def problema(self):
         b=Busqueda()
-        frontera= queue.PriorityQueue()
+        frontera= queue.Queue()
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
-        #estado_inicial,estado_objetivo=b.readjson("prueba.json")
-        estado_inicial=(0,0)
-        estado_objetivo=(8,2)
+        estado_inicial,estado_objetivo=b.readjson("prueba.json")
+        print(estado_inicial)
+        #estado_inicial=(0,0)
+        #estado_objetivo=(8,2)
         estado_inicial=b.conversion_estado(estado_inicial,estados)
         estado_objetivo=b.conversion_estado(estado_objetivo,estados)
+        
         funcion_sucesores.append(estado_inicial)
-        costo=0
-        profundidad=0
-        heuristica=0
-        id=0
+        print("lista",funcion_sucesores)
+        lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, 0, 0, None ,0,0)
+        
         estado=estado_inicial
         while(b.objetivo(estado_objetivo,estado)!=True):
-            frontera.put(lista_nodos)
+            for i in lista_nodos:
+                
+                frontera.put(i)
             nodo=frontera.get()
+           
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)
+            
             lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, id, costo, estado,heuristica,profundidad)
             frontera=b.reorden_frontera(frontera, lista_nodos)
+            print("reorden",lista_nodos)
+            sleep(10)
 
 
 

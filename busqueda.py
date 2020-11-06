@@ -36,6 +36,7 @@ class Busqueda():
         funcion_sucesores=[]
         sucesores=[]
         lista_vecinos=estado.get_vecinos()
+        
         for i in lista_vecinos:
             if(i==(f-1,c)):
                sucesores=['N',(f-1,c),1]
@@ -49,12 +50,17 @@ class Busqueda():
             elif(i==(f,c-1)):
                 sucesores=['O', (f,c-1), 1]
                 funcion_sucesores.append(sucesores)
+        
         return funcion_sucesores
     
     def nodo_a_estado(self, nodo, estados):
+        estado=0
+
         for i in estados:
-            if(nodo.get_id_estado==i.get_tupla()):
-                return i
+            
+            if(nodo.get_id_estado()==i.get_tupla()):
+                estado=i
+        return estado
 
 
     def generar_vecinos(self,estado):
@@ -80,11 +86,18 @@ class Busqueda():
 
     def generar_estados(self, casillas):
         estados=[]
+        
         for i in casillas:
+            
             f,c=i.get_tupla()
             valor=i.get_valor()
             estado=Estado((f,c),valor)
+            estado.set_N(i.get_N())
+            estado.set_E(i.get_E())
+            estado.set_S(i.get_S())
+            estado.set_O(i.get_O())
             listas_vecinos=self.generar_vecinos(estado)
+            
             estado.set_vecinos(listas_vecinos)
             estados.append(estado)
         return estados
@@ -108,14 +121,20 @@ class Busqueda():
     
     def reorden_frontera(self, frontera, lista_nodos):
         for i in lista_nodos:
-            nodo_aux=i.get_id_estado()
+            nodo_aux=i
             tamanio_frontera=frontera.qsize()
+            print("nodoaux",nodo_aux.get_id_estado())
+            print("tamañofronter",tamanio_frontera)
             j=0
             while j<tamanio_frontera:
+               
                 nodo_comparacion=frontera.get()
-                if(nodo_comparacion==nodo_aux.get_valor()):
+                print("nodocomparacion",nodo_comparacion.get_id_estado())
+                if(nodo_comparacion.get_valor()==nodo_aux.get_valor()):
                     f0,c0=nodo_comparacion.get_id_estado()
+                    
                     f1,c1=nodo_aux.get_id_estado()
+                    print("f",f0 ,f1)
                     if(f0==f1):
                         if(c0>c1):
                             frontera.put(nodo_aux)
@@ -133,25 +152,35 @@ class Busqueda():
                     frontera.put(nodo_aux)
                     nodo_aux=nodo_comparacion
                 else:
+                    
                     frontera.put(nodo_comparacion)
                 j+=1
+            print("aux",nodo_aux)
+            if()
             frontera.put(nodo_aux)
-
+            print("ReordenNodo",frontera)
         return frontera
     
     def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad):
         lista_nodos=[]
+        valor=0
         for i in funcion_sucesores:
-            print(i[1])
-            id_estado= i[1]
-            accion=i[0]
-            valor=i[2]
             if(id!=0):
                 id_padre= estado.get_tupla()
+                id_estado= i[1]
+                accion=i[0]
+                valor=i[2]
+               
             else:
-                id_padre=None
+                id_padre= None
+                id_estado=i.get_tupla()
+               
+                accion=None
+                valor=i.get_valor()   
+            
             id+=1
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
+            
             lista_nodos.append(nodo)
             nodo.set_costo(costo+1)    #1 futuramente cambiará
             nodo.set_profundidad(profundidad+1)
@@ -159,9 +188,15 @@ class Busqueda():
         return lista_nodos,id, costo, profundidad, heuristica, valor
 
     def conversion_estado(self, estado, estados):
+        a=0
+        valor1=estado.split(',')[0].split('(')[1]
+        valor2=estado.split(',')[1].split(')')[0]
+        estado=(int(valor1),int(valor2))
         for i in estados:
             if(estado==i.get_tupla()):
-                return i
+                a=i
+                print("encontrado")
+        return a
         
     def objetivo(self, estado_objetivo,estado):
         if(estado_objetivo==estado):
