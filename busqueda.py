@@ -27,7 +27,7 @@ class Busqueda():
             initial=datos['INITIAL']
             objetive=datos['OBJETIVE']
             maze=datos['MAZE']
-            print(initial)
+           
 
         return initial,objetive 
 
@@ -103,62 +103,51 @@ class Busqueda():
         return estados
     
 
-    '''def movimiento_permitido(self,filas,columnas, estado):
-        Movimiento aleatorio para decidir si vamos al N,E,S o O
-        lista_movimientos=[0,1,2,3]
-        f,c=estado.get_tupla()
-
-        if (f==0):
-            lista_movimientos.remove(0) #norte
-        elif (f==filas-1):
-            lista_movimientos.remove(2) #sur
-        if (c==0):
-            lista_movimientos.remove(3) #Este
-        elif (c==columnas-1):
-            lista_movimientos.remove(1) #Oeste
-        
-        return lista_movimientos'''
     
-    def reorden_frontera(self, frontera, lista_nodos):
+    def reorden_frontera(self, frontera, lista_nodos,circuito):
+        
         for i in lista_nodos:
-            nodo_aux=i
-            tamanio_frontera=frontera.qsize()
-            print("nodoaux",nodo_aux.get_id_estado())
-            print("tamañofronter",tamanio_frontera)
-            j=0
-            while j<tamanio_frontera:
+            repetido=False
+            for j in circuito:
+                if j.get_id_estado()==i.get_id_estado():
+                    repetido=True
+            if repetido==False:
+                nodo_aux=i
+                tamanio_frontera=frontera.qsize()
                
-                nodo_comparacion=frontera.get()
-                print("nodocomparacion",nodo_comparacion.get_id_estado())
-                if(nodo_comparacion.get_valor()==nodo_aux.get_valor()):
-                    f0,c0=nodo_comparacion.get_id_estado()
-                    
-                    f1,c1=nodo_aux.get_id_estado()
-                    print("f",f0 ,f1)
-                    if(f0==f1):
-                        if(c0>c1):
+                j=0
+                while j<tamanio_frontera:
+                    nodo_comparacion=frontera.get()
+                   
+                    if(nodo_comparacion.get_valor()==nodo_aux.get_valor()):
+                        f0,c0=nodo_comparacion.get_id_estado()
+                        
+                        f1,c1=nodo_aux.get_id_estado()
+                        
+                        if(f0==f1):
+                            if(c0>c1):
+                                frontera.put(nodo_aux)
+                                nodo_aux=nodo_comparacion
+                            else:
+                                frontera.put(nodo_comparacion)
+
+                        elif(f0>f1):
                             frontera.put(nodo_aux)
                             nodo_aux=nodo_comparacion
                         else:
                             frontera.put(nodo_comparacion)
 
-                    elif(f0>f1):
+                    elif(nodo_comparacion.get_valor()>nodo_aux.get_valor()):
                         frontera.put(nodo_aux)
                         nodo_aux=nodo_comparacion
                     else:
-                        frontera.put(nodo_comparacion)
-
-                elif(nodo_comparacion.get_valor()>nodo_aux.get_valor()):
-                    frontera.put(nodo_aux)
-                    nodo_aux=nodo_comparacion
-                else:
                     
-                    frontera.put(nodo_comparacion)
-                j+=1
-            print("aux",nodo_aux)
-            if()
-            frontera.put(nodo_aux)
-            print("ReordenNodo",frontera)
+                        frontera.put(nodo_comparacion)
+                    j+=1
+                
+                frontera.put(nodo_aux)
+                
+           
         return frontera
     
     def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad):
@@ -188,15 +177,15 @@ class Busqueda():
         return lista_nodos,id, costo, profundidad, heuristica, valor
 
     def conversion_estado(self, estado, estados):
-        a=0
+        aux=0
         valor1=estado.split(',')[0].split('(')[1]
         valor2=estado.split(',')[1].split(')')[0]
         estado=(int(valor1),int(valor2))
         for i in estados:
             if(estado==i.get_tupla()):
-                a=i
-                print("encontrado")
-        return a
+                aux=i
+                
+        return aux
         
     def objetivo(self, estado_objetivo,estado):
         if(estado_objetivo==estado):
