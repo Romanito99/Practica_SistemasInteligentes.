@@ -320,6 +320,7 @@ class Laberinto(object):
                 casilla.set_E(neighbors[1])
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
+                casilla.set_valor(v) '''Aqui he cambiado tb esto , espero que este bien '''
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
@@ -384,7 +385,7 @@ class Laberinto(object):
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        while(b.objetivo(estado_objetivo,estado)!=True):
+        while(b.objetivo(estado_objetivo,estado)!=True):  
             nodo=frontera.get()
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
@@ -396,4 +397,4 @@ class Laberinto(object):
 
 
 
-a=Laberinto("laberinto.json")
+a=Laberinto(25,25)
