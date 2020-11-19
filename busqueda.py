@@ -2,6 +2,7 @@ import json
 from estado import Estado
 from casilla import Casilla
 from nodo import Nodo
+import heapq
 
 
 class Busqueda():
@@ -55,7 +56,7 @@ class Busqueda():
     
     def nodo_a_estado(self, nodo, estados):
         estado=0
-
+        
         for i in estados:
             
             if(nodo.get_id_estado()==i.get_tupla()):
@@ -112,7 +113,15 @@ class Busqueda():
                 if j.get_id_estado()==i.get_id_estado():
                     repetido=True
             if repetido==False:
-                nodo_aux=i
+                f,c=i.get_id_estado()
+                A=(i.get_valor(),f,c,i)
+                heapq.heappush(frontera,A)
+
+
+
+
+
+                '''nodo_aux=i
                 tamanio_frontera=frontera.qsize()
                
                 j=0
@@ -145,7 +154,7 @@ class Busqueda():
                         frontera.put(nodo_comparacion)
                     j+=1
                 
-                frontera.put(nodo_aux)
+                frontera.put(nodo_aux)'''
                 
            
         return frontera

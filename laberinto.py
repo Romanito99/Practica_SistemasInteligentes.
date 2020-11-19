@@ -6,6 +6,7 @@ from busqueda import Busqueda
 from nodo import Nodo
 import queue
 from time import sleep
+import heapq
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
@@ -370,7 +371,7 @@ class Laberinto(object):
     def problema(self):
         circuitofinal=[]
         b=Busqueda()
-        frontera= queue.Queue()
+        frontera= []
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
         estado_inicial,estado_objetivo=b.readjson("prueba.json")
@@ -385,7 +386,7 @@ class Laberinto(object):
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         while(b.objetivo(estado_objetivo,estado)!=True):
-            nodo=frontera.get()
+            nodo=heapq.heappop(frontera)[3]
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)
@@ -396,4 +397,4 @@ class Laberinto(object):
 
 
 
-a=Laberinto("laberinto.json")
+a=Laberinto(10,10)
