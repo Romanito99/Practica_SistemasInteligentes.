@@ -2,10 +2,11 @@ import json
 from random import randint
 from casilla import Casilla
 import matplotlib.pyplot as plt
-#from busqueda import Busqueda
+from busqueda import Busqueda
 from nodo import Nodo
 import queue
 from time import sleep
+import heapq
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
@@ -383,7 +384,7 @@ class Laberinto(object):
     def problema(self):
         circuitofinal=[]
         b=Busqueda()
-        frontera= queue.Queue()
+        frontera= []
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
         estado_inicial,estado_objetivo=b.readjson("prueba.json")
@@ -393,12 +394,12 @@ class Laberinto(object):
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, 0, 0, None ,0,0)
+        lista_nodos, id, costo, profundidad, heuristica, valor = b.creacion_nodo(funcion_sucesores, 0, 0, None ,0,0)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         while(b.objetivo(estado_objetivo,estado)!=True):  
-            nodo=frontera.get()
+            nodo=heapq.heappop(frontera)[3]
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)

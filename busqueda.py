@@ -2,6 +2,7 @@ import json
 from estado import Estado
 from casilla import Casilla
 from nodo import Nodo
+import heapq
 
 
 class Busqueda():
@@ -112,7 +113,15 @@ class Busqueda():
                 if j.get_id_estado()==i.get_id_estado():
                     repetido=True
             if repetido==False:
-                nodo_aux=i
+                f,c=i.get_id_estado()
+                A=(i.get_valor(),f,c,i.get_id_estado(),i)
+                heapq.heappush(frontera,A)
+
+
+
+
+
+                '''nodo_aux=i
                 tamanio_frontera=frontera.qsize()
                
                 j=0
@@ -145,7 +154,7 @@ class Busqueda():
                         frontera.put(nodo_comparacion)
                     j+=1
                 
-                frontera.put(nodo_aux)
+                frontera.put(nodo_aux)'''
                 
            
         return frontera
@@ -159,8 +168,8 @@ class Busqueda():
                 id_estado= i[1]
                 accion=i[0]
                 costo= estado.get_costo() +  i[2]
-                valor=valor(i,estrategia)
-                heuristica=heuristica(nodo , id_estado , objetivo.get_tupla()) 
+                valor=self.value(i,estrategia)
+                heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla()) 
               
             else:
                 id_padre= None
@@ -197,7 +206,7 @@ class Busqueda():
             return True
         
     
-    def valor(self , nodo , estrategia): 
+    def value(self , nodo , estrategia): 
         if estrategia=='BREADTH': 
             valor= nodo.get_profundidad()
 
@@ -212,8 +221,7 @@ class Busqueda():
 
         elif estrategia == 'A' :
             valor= nodo.get_costo() + nodo.get_heurisitica()
-
-    return valor
+        return valor
 
     '''Estos metodos hay que revisarle , pero juraria que esta bien'''
     
@@ -223,4 +231,4 @@ class Busqueda():
         f,c=estado
         f1,c1=objetivo
         DisManhattan= abs(f-f1)+ abs(c-c1)
-    return DisManhattan
+        return DisManhattan
