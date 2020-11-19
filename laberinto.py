@@ -2,7 +2,7 @@ import json
 from random import randint
 from casilla import Casilla
 import matplotlib.pyplot as plt
-from busqueda import Busqueda
+#from busqueda import Busqueda
 from nodo import Nodo
 import queue
 from time import sleep
@@ -26,8 +26,8 @@ class Laberinto(object):
             self.to_json(self.casillas)
             self.dibujar(self.casillas)
 
-        estado=self.problema()
-        print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
+        #estado,frontera,circuitofinal=self.problema()
+        #print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
@@ -226,39 +226,51 @@ class Laberinto(object):
 
         return numero
 
-    def dibujar(self,casillas):
+    def dibujar(self,casillas):   
+        
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
-
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
 
-        plt.axvspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
-        plt.axvspan(-0.1, self.filas+0.1, facecolor='black', alpha=2)
+        plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
+        
+        
         plt.ylim(self.filas+0.1,-0.1)
         plt.xlim(-0.1,self.columnas+0.1)
         plt.style.use('dark_background')
         for i in casillas:
+            
 
-            c,f=i.get_tupla()
+            f,c=i.get_tupla()
+            
             if (i.get_S()==False):
-
-                plt.plot([f,f+1],[c+1,c+1],color='white',linewidth=3.0)
+                
+                plt.plot([c,c+1],[f+1,f+1],color='white',linewidth=3.0)
             else:
-                plt.plot([f,f+1],[c+1,c+1],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f+1,f+1],color='dimgray',linestyle="--")
             if (i.get_E()==False):
 
-                plt.plot([f+1,f+1],[c,c+1],color='white',linewidth=3.0)
+                plt.plot([c+1,c+1],[f,f+1],color='white',linewidth=3.0)
             else:
-                plt.plot([f+1,f+1],[c,c+1],color='dimgray',linestyle="--")
+                plt.plot([c+1,c+1],[f,f+1],color='dimgray',linestyle="--")
             if (i.get_N()==False):
 
-                plt.plot([f,f+1],[c,c],color='white',linewidth=3.0)
+                plt.plot([c,c+1],[f,f],color='white',linewidth=3.0)
             else:
-                plt.plot([f,f+1],[c,c],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f,f],color='dimgray',linestyle="--")
             if (i.get_O()==False):
 
-                plt.plot([f,f],[c,c+1],color='white',linewidth=3.0)
+                plt.plot([c,c],[f,f+1],color='white',linewidth=3.0)
             else:
-                plt.plot([f,f],[c,c+1],color='dimgray',linestyle="--")
+                plt.plot([c,c],[f,f+1],color='dimgray',linestyle="--")
+            
+            '''if(i in hola):
+                ymin=1-(f/self.filas) 
+                print("hola",ymin)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='yellow')'''
+                
+                
+                
 
         plt.savefig("laberinto.png")
 
@@ -320,7 +332,7 @@ class Laberinto(object):
                 casilla.set_E(neighbors[1])
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
-                casilla.set_valor(v) '''Aqui he cambiado tb esto , espero que este bien '''
+                casilla.set_valor(v) 
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
@@ -393,8 +405,8 @@ class Laberinto(object):
             lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, id, costo, estado,heuristica,profundidad)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
             
-        return estado  
+        return estado ,frontera , circuitofinal 
 
 
 
-a=Laberinto(25,25)
+a=Laberinto(4,4)
