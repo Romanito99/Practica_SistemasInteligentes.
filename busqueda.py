@@ -40,16 +40,16 @@ class Busqueda():
         
         for i in lista_vecinos:
             if(i==(f-1,c)):
-               sucesores=['N',(f-1,c),1]
+               sucesores=['N',(f-1,c),estado.get_valor()+1]
                funcion_sucesores.append(sucesores) 
             elif(i==(f,c+1)):
-                sucesores=['E', (f,c+1), 1] 
+                sucesores=['E', (f,c+1),estado.get_valor()+1] 
                 funcion_sucesores.append(sucesores) 
             elif(i==(f+1,c)):
-                sucesores=['S', (f+1,c), 1] 
+                sucesores=['S', (f+1,c), estado.get_valor()+1] 
                 funcion_sucesores.append(sucesores)
             elif(i==(f,c-1)):
-                sucesores=['O', (f,c-1), 1]
+                sucesores=['O', (f,c-1), estado.get_valor()+1]
                 funcion_sucesores.append(sucesores)
         
         return funcion_sucesores
@@ -114,7 +114,7 @@ class Busqueda():
                     repetido=True
             if repetido==False:
                 f,c=i.get_id_estado()
-                A=(i.get_valor(),f,c,i)
+                A=(i.get_valor(),f,c,i.get_id_estado(),i)
                 heapq.heappush(frontera,A)
 
 
@@ -159,7 +159,7 @@ class Busqueda():
            
         return frontera
     
-    def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad):
+    def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad , estrategia , objetivo):
         lista_nodos=[]
         valor=0
         for i in funcion_sucesores:
@@ -167,23 +167,28 @@ class Busqueda():
                 id_padre= estado.get_tupla()
                 id_estado= i[1]
                 accion=i[0]
-                valor=i[2]
-               
+                costo= estado.get_costo() +  i[2]
+                valor=self.value(i,estrategia)
+                heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla()) 
+              
             else:
                 id_padre= None
                 id_estado=i.get_tupla()
-               
                 accion=None
-                valor=i.get_valor()   
-            
+                costo=0
+                valor=valor(i,estrategia)  
+                heuristica=heuristica(nodo , id_estado , objetivo.get_tupla()) 
+                
             id+=1
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
             
             lista_nodos.append(nodo)
-            nodo.set_costo(costo+1)    #1 futuramente cambiará
             nodo.set_profundidad(profundidad+1)
         
         return lista_nodos,id, costo, profundidad, heuristica, valor
+
+        '''En este metodo he cambiado como calcular el valor y la heuristica , falta mirar bien como cambiar el costo ( hay que cambiar tanto el costo de cada nodo '''
+        '''y luego el costo total), creo que deberiamos pasarle la lista estados y utilizar el metodo nodotoestado y coger de ahi el valor y sumarle 1 y el cost general''' 
 
     def conversion_estado(self, estado, estados):
         aux=0
@@ -201,8 +206,29 @@ class Busqueda():
             return True
         
     
+    def value(self , nodo , estrategia): 
+        if estrategia=='BREADTH': 
+            valor= nodo.get_profundidad()
 
+        elif estrategia =='DEPTH':
+            valor= 1/(nodo.get_profundidad()+1)
 
+        elif estrategia == 'UNIFORM':
+            valor= nodo.get_costo()
+
+        elif estrategia == ' GREDDY':
+            valor= nodo.get_heurisitica()
+
+        elif estrategia == 'A' :
+            valor= nodo.get_costo() + nodo.get_heurisitica()
+        return valor
+
+    '''Estos metodos hay que revisarle , pero juraria que esta bien'''
     
 
 
+    def heurisitica(self, nodo , estado , objetivo): 
+        f,c=estado
+        f1,c1=objetivo
+        DisManhattan= abs(f-f1)+ abs(c-c1)
+        return DisManhattan

@@ -1,6 +1,6 @@
 {
-    "rows": 10,
-    "cols": 10,
+    "rows": 4,
+    "cols": 4,
     "max_n": 4,
     "mov": [
         [
@@ -40,6 +40,7 @@
             "value": 0,
             "neighbors": [
                 false,
+<<<<<<< HEAD
                 false,
                 true,
                 false
@@ -82,6 +83,14 @@
             ]
         },
         "(0, 6)": {
+=======
+                true,
+                false,
+                true
+            ]
+        },
+        "(0, 2)": {
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 false,
@@ -90,6 +99,7 @@
                 true
             ]
         },
+<<<<<<< HEAD
         "(0, 7)": {
             "value": 0,
             "neighbors": [
@@ -111,9 +121,14 @@
         "(0, 9)": {
             "value": 0,
             "neighbors": [
+=======
+        "(0, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false,
                 false,
-                true,
                 true
             ]
         },
@@ -122,7 +137,7 @@
             "neighbors": [
                 true,
                 true,
-                false,
+                true,
                 false
             ]
         },
@@ -131,14 +146,14 @@
             "neighbors": [
                 true,
                 true,
-                false,
+                true,
                 true
             ]
         },
         "(1, 2)": {
             "value": 0,
             "neighbors": [
-                true,
+                false,
                 true,
                 false,
                 true
@@ -153,6 +168,7 @@
                 true
             ]
         },
+<<<<<<< HEAD
         "(1, 4)": {
             "value": 0,
             "neighbors": [
@@ -163,10 +179,14 @@
             ]
         },
         "(1, 5)": {
+=======
+        "(2, 0)": {
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 false,
                 true,
+<<<<<<< HEAD
                 true,
                 false
             ]
@@ -199,23 +219,21 @@
             ]
         },
         "(1, 9)": {
+=======
+                false
+            ]
+        },
+        "(2, 1)": {
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 true,
                 false,
-                false,
-                false
-            ]
-        },
-        "(2, 0)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
                 true,
                 false
             ]
         },
+<<<<<<< HEAD
         "(2, 1)": {
             "value": 0,
             "neighbors": [
@@ -225,10 +243,13 @@
                 true
             ]
         },
+=======
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
         "(2, 2)": {
             "value": 0,
             "neighbors": [
                 false,
+<<<<<<< HEAD
                 true,
                 true,
                 true
@@ -239,10 +260,13 @@
             "neighbors": [
                 false,
                 true,
+=======
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false,
                 true
             ]
         },
+<<<<<<< HEAD
         "(2, 4)": {
             "value": 0,
             "neighbors": [
@@ -297,11 +321,23 @@
                 true
             ]
         },
+=======
+        "(2, 3)": {
+            "value": 0,
+            "neighbors": [
+                false,
+                false,
+                true,
+                false
+            ]
+        },
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
         "(3, 0)": {
             "value": 0,
             "neighbors": [
                 true,
                 false,
+<<<<<<< HEAD
                 false,
                 false
             ]
@@ -366,14 +402,18 @@
                 false,
                 true,
                 false,
+=======
+                false,
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false
             ]
         },
-        "(3, 8)": {
+        "(3, 1)": {
             "value": 0,
             "neighbors": [
                 true,
                 true,
+<<<<<<< HEAD
                 true,
                 true
             ]
@@ -393,14 +433,18 @@
                 false,
                 true,
                 true,
+=======
+                false,
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false
             ]
         },
-        "(4, 1)": {
+        "(3, 2)": {
             "value": 0,
             "neighbors": [
                 true,
                 false,
+<<<<<<< HEAD
                 true,
                 true
             ]
@@ -919,6 +963,12 @@
             ]
         },
         "(9, 9)": {
+=======
+                true
+            ]
+        },
+        "(3, 3)": {
+>>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 true,
