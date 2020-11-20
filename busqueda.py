@@ -128,32 +128,28 @@ class Busqueda():
         heuristica=0
         costo=0
         
-
         for i in funcion_sucesores:
             
             if(id!=0):
-                id_padre= estado.get_tupla()
+                id_padre= nodo_padre.get_id()
                 id_estado= i[1]
                 accion=i[0]
                 profundidad=nodo_padre.get_profundidad()+1
                 print("profundidad",profundidad)
                 costo= nodo_padre.get_costo() +  i[2]  
-                
-                
-              
+                 
             else:
                 id_padre= None
                 id_estado=i.get_tupla()
                 accion=None
                 profundidad=0
                 costo=0
-                 
-                
-            id+=1
+            
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
             heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla())
             nodo.set_heuristica(heuristica)
             valor=self.value(nodo,estrategia)
+            id+=1
             
             nodo.set_valor(valor)  
            
@@ -196,6 +192,7 @@ class Busqueda():
 
         elif estrategia == 'A' :
             valor= nodo.get_costo() + nodo.get_heuristica()
+            
 
         return valor
 
@@ -208,3 +205,50 @@ class Busqueda():
         f1,c1=objetivo
         DisManhattan= abs(f-f1)+ abs(c-c1)
         return DisManhattan
+
+    def imprimir_solucion(self, lista_solucion):
+        with open('solucion.txt','w') as f:
+            f.write('[id][cost,state,father_id,action,depth,h,value]\n')
+            for i in lista_solucion:
+                f.write('[{}][{},{},{},{},{},{},{}]\n'.format(i.get_id(),i.get_costo(),i.get_id_estado(),i.get_id_padre(),i.get_accion(),i.get_profundidad(),i.get_heuristica(),i.get_valor()))
+
+    def encontrar_solucion(self, circuitofinal, estado_inicial):
+        lista_solucion=[]
+        circuitofinal= list(reversed(circuitofinal))
+        print(circuitofinal)
+        nodo_final=circuitofinal[0]
+        lista_solucion.append(nodo_final)
+        nodo_aux=nodo_final
+        while (nodo_aux.get_id_estado()!=estado_inicial.get_tupla()):
+            for i in circuitofinal:
+                f0,c0=nodo_aux.get_id_estado()
+                f1,c1=i.get_id_estado()
+                if(nodo_aux.get_accion()=='N'):
+                    if(f1==f0+1 and c1==c0):
+                        nodo_aux=i
+                        lista_solucion.append(nodo_aux)
+
+                if(nodo_aux.get_accion()=='S'):
+                    if(f1==f0-1 and c1==c0):
+                        nodo_aux=i
+                        lista_solucion.append(nodo_aux)
+
+                if(nodo_aux.get_accion()=='E'):
+                    if(f1==f0 and c1==c0-1):
+                        nodo_aux=i
+                        lista_solucion.append(nodo_aux)
+                
+                if(nodo_aux.get_accion()=='O'):
+                    if(f1==f0 and c1==c0+1):
+                        nodo_aux=i
+                        lista_solucion.append(nodo_aux)
+
+        return list(reversed(lista_solucion))
+
+
+            
+
+
+
+
+            
