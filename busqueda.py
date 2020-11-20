@@ -114,78 +114,53 @@ class Busqueda():
                     repetido=True
             if repetido==False:
                 f,c=i.get_id_estado()
-                A=(i.get_valor(),f,c,i.get_id_estado(),i)
+                A=(i.get_valor(),f,c,i.get_id(),i)
+                print("iteraccion")
+                print(A[4].get_id_estado())
                 heapq.heappush(frontera,A)
-
-
-
-
-
-                '''nodo_aux=i
-                tamanio_frontera=frontera.qsize()
-               
-                j=0
-                while j<tamanio_frontera:
-                    nodo_comparacion=frontera.get()
-                   
-                    if(nodo_comparacion.get_valor()==nodo_aux.get_valor()):
-                        f0,c0=nodo_comparacion.get_id_estado()
-                        
-                        f1,c1=nodo_aux.get_id_estado()
-                        
-                        if(f0==f1):
-                            if(c0>c1):
-                                frontera.put(nodo_aux)
-                                nodo_aux=nodo_comparacion
-                            else:
-                                frontera.put(nodo_comparacion)
-
-                        elif(f0>f1):
-                            frontera.put(nodo_aux)
-                            nodo_aux=nodo_comparacion
-                        else:
-                            frontera.put(nodo_comparacion)
-
-                    elif(nodo_comparacion.get_valor()>nodo_aux.get_valor()):
-                        frontera.put(nodo_aux)
-                        nodo_aux=nodo_comparacion
-                    else:
-                    
-                        frontera.put(nodo_comparacion)
-                    j+=1
-                
-                frontera.put(nodo_aux)'''
                 
            
         return frontera
     
-    def creacion_nodo(self, funcion_sucesores, id, costo,estado,heuristica,profundidad , estrategia , objetivo):
+    def creacion_nodo(self, funcion_sucesores, id, estado,estrategia,  objetivo,nodo_padre):
         lista_nodos=[]
         valor=0
+        heuristica=0
+        costo=0
+        
+
         for i in funcion_sucesores:
+            
             if(id!=0):
                 id_padre= estado.get_tupla()
                 id_estado= i[1]
                 accion=i[0]
-                costo= estado.get_costo() +  i[2]
-                valor=self.value(i,estrategia)
-                heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla()) 
+                profundidad=nodo_padre.get_profundidad()+1
+                print("profundidad",profundidad)
+                costo= nodo_padre.get_costo() +  i[2]  
+                
+                
               
             else:
                 id_padre= None
                 id_estado=i.get_tupla()
                 accion=None
+                profundidad=0
                 costo=0
-                valor=valor(i,estrategia)  
-                heuristica=heuristica(nodo , id_estado , objetivo.get_tupla()) 
+                 
                 
             id+=1
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
+            heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla())
+            nodo.set_heuristica(heuristica)
+            valor=self.value(nodo,estrategia)
             
+            nodo.set_valor(valor)  
+           
             lista_nodos.append(nodo)
-            nodo.set_profundidad(profundidad+1)
+            
         
-        return lista_nodos,id, costo, profundidad, heuristica, valor
+        return lista_nodos,id
 
         '''En este metodo he cambiado como calcular el valor y la heuristica , falta mirar bien como cambiar el costo ( hay que cambiar tanto el costo de cada nodo '''
         '''y luego el costo total), creo que deberiamos pasarle la lista estados y utilizar el metodo nodotoestado y coger de ahi el valor y sumarle 1 y el cost general''' 
@@ -211,23 +186,24 @@ class Busqueda():
             valor= nodo.get_profundidad()
 
         elif estrategia =='DEPTH':
-            valor= 1/(nodo.get_profundidad()+1)
+            valor= (1/(nodo.get_profundidad()+1))
 
         elif estrategia == 'UNIFORM':
             valor= nodo.get_costo()
 
-        elif estrategia == ' GREDDY':
-            valor= nodo.get_heurisitica()
+        elif estrategia == 'GREDDY':
+            valor= nodo.get_heuristica()
 
         elif estrategia == 'A' :
-            valor= nodo.get_costo() + nodo.get_heurisitica()
+            valor= nodo.get_costo() + nodo.get_heuristica()
+
         return valor
 
     '''Estos metodos hay que revisarle , pero juraria que esta bien'''
     
 
 
-    def heurisitica(self, nodo , estado , objetivo): 
+    def heuristic(self, nodo , estado , objetivo): 
         f,c=estado
         f1,c1=objetivo
         DisManhattan= abs(f-f1)+ abs(c-c1)
