@@ -27,8 +27,8 @@ class Laberinto(object):
             self.to_json(self.casillas)
             self.dibujar(self.casillas)
 
-        #estado,frontera,circuitofinal=self.problema()
-        #print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
+        estado,frontera,circuitofinal=self.problema()
+        print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
@@ -394,20 +394,49 @@ class Laberinto(object):
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, id, costo, profundidad, heuristica, valor = b.creacion_nodo(funcion_sucesores, 0, 0, None ,0,0)
+        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        while(b.objetivo(estado_objetivo,estado)!=True):  
-            nodo=heapq.heappop(frontera)[3]
+        while(b.objetivo(estado_objetivo,estado)!=True): 
+           
+            nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
+            print("esto lo saca",nodo.get_id_estado())
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)
-            lista_nodos, id, costo, profundidad, heuristica, valor=b.creacion_nodo(funcion_sucesores, id, costo, estado,heuristica,profundidad)
+            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-            
-        return estado ,frontera , circuitofinal 
+        print(frontera)
+        frontera=self.comprobarfrontera2(circuitofinal,frontera)
+        '''f,c=nodo.get_id_estado()
+        A=(nodo.get_valor(),f,c,nodo.get_id(),nodo)
+        heapq.heappush(frontera,A)'''
+        for i in frontera:
+            print(i[4].get_id_estado())
+        for i in circuitofinal:
+            print("circuito",i.get_id_estado())
+        
+        return estado ,frontera , circuitofinal
+    
+    def comprobarfrontera(self,circuitofinal,frontera):
+        nodo=heapq.heappop(frontera)[4]
+        if(len(frontera)!=0):
+            for i in circuitofinal:
 
+                while nodo.get_id_estado()== i.get_id_estado():
+                    nodo=heapq.heappop(frontera)[4]
+        return nodo , frontera
 
+    def comprobarfrontera2(self,circuitofinal,frontera):
+        #nodo=heapq.heappop(frontera)[4]
+        #print("hola",nodo.get_id_estado())
+        if(len(frontera)!=0):
+            for i in circuitofinal:
 
-a=Laberinto(4,4)
+                for j in frontera:
+                    if(i.get_id_estado()==j[4].get_id_estado()):
+                        frontera.remove(j)
+        return  frontera
+
+a=Laberinto("problema_5x5_maze.json")
