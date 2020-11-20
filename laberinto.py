@@ -394,7 +394,7 @@ class Laberinto(object):
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
+        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'BREADTH',estado_objetivo,None)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
@@ -405,20 +405,27 @@ class Laberinto(object):
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado)
-            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
+            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'BREADTH',estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         print(frontera)
         frontera=self.comprobarfrontera2(circuitofinal,frontera)
-        '''f,c=nodo.get_id_estado()
-        A=(nodo.get_valor(),f,c,nodo.get_id(),nodo)
-        heapq.heappush(frontera,A)'''
+
+        lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
+        b.imprimir_solucion(lista_solucion)
+        
         for i in frontera:
             print(i[4].get_id_estado())
+
         for i in circuitofinal:
             print("circuito",i.get_id_estado())
+            print("valor", i.get_valor())
+
+        for i in lista_solucion:
+            print(i.get_id_estado())
         
         return estado ,frontera , circuitofinal
     
+
     def comprobarfrontera(self,circuitofinal,frontera):
         nodo=heapq.heappop(frontera)[4]
         if(len(frontera)!=0):
