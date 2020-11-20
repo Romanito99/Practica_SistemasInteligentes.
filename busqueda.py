@@ -177,7 +177,7 @@ class Busqueda():
                 accion=None
                 costo=0
                 valor=valor(i,estrategia)  
-                heuristica=heuristica(nodo , id_estado , objetivo.get_tupla()) 
+                heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla()) 
                 
             id+=1
             nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
@@ -227,7 +227,7 @@ class Busqueda():
     
 
 
-    def heurisitica(self, nodo , estado , objetivo): 
+    def heurisitic(self, nodo , estado , objetivo): 
         f,c=estado
         f1,c1=objetivo
         DisManhattan= abs(f-f1)+ abs(c-c1)
