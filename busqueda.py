@@ -32,7 +32,7 @@ class Busqueda():
 
         return initial,objetive 
 
-    def creacion_sucesores(self,estado):
+    def creacion_sucesores(self,estado,lista_estados):
         f,c =estado.get_tupla()
         funcion_sucesores=[]
         sucesores=[]
@@ -40,23 +40,27 @@ class Busqueda():
         
         for i in lista_vecinos:
             if(i==(f-1,c)):
-               sucesores=['N',(f-1,c),estado.get_valor()+1]
-               funcion_sucesores.append(sucesores) 
+                sucesor=self.conversion_estado(str((f-1,c)),lista_estados)
+                sucesores=['N',(f-1,c),sucesor.get_valor()+1]
+                funcion_sucesores.append(sucesores) 
             elif(i==(f,c+1)):
-                sucesores=['E', (f,c+1),estado.get_valor()+1] 
+                sucesor=self.conversion_estado(str((f,c+1)),lista_estados)
+                sucesores=['E', (f,c+1),sucesor.get_valor()+1] 
                 funcion_sucesores.append(sucesores) 
             elif(i==(f+1,c)):
-                sucesores=['S', (f+1,c), estado.get_valor()+1] 
+                sucesor=self.conversion_estado(str((f+1,c)),lista_estados)
+                sucesores=['S', (f+1,c), sucesor.get_valor()+1] 
                 funcion_sucesores.append(sucesores)
             elif(i==(f,c-1)):
-                sucesores=['O', (f,c-1), estado.get_valor()+1]
+                sucesor=self.conversion_estado(str((f,c-1)),lista_estados)
+                sucesores=['O', (f,c-1), sucesor.get_valor()+1]
                 funcion_sucesores.append(sucesores)
         
         return funcion_sucesores
     
     def nodo_a_estado(self, nodo, estados):
         estado=0
-
+        
         for i in estados:
             
             if(nodo.get_id_estado()==i.get_tupla()):
@@ -187,7 +191,7 @@ class Busqueda():
         elif estrategia == 'UNIFORM':
             valor= nodo.get_costo()
 
-        elif estrategia == 'GREDDY':
+        elif estrategia == 'GREEDY':
             valor= nodo.get_heuristica()
 
         elif estrategia == 'A' :

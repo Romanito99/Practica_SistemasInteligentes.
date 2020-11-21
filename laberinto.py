@@ -15,9 +15,7 @@ class Laberinto(object):
         self.prueba=2
         if (len(args)==1):
             self.read_json(args[0])
-            if(not self.comprobar_integridad()):
-                self.dibujar(self.casillas)
-            else:
+            if(self.comprobar_integridad()):
                 print("Ha dado error en el json")
 
         else:
@@ -25,9 +23,9 @@ class Laberinto(object):
             self.columnas=args[1]
             self.casillas=self.tablero()
             self.to_json(self.casillas)
-            self.dibujar(self.casillas)
 
-        estado,frontera,circuitofinal=self.problema()
+        estado,frontera,circuitofinal,lista_solucion=self.problema()
+        self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion)
         print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
 
@@ -227,7 +225,7 @@ class Laberinto(object):
 
         return numero
 
-    def dibujar(self,casillas):   
+    def dibujar(self,casillas,frontera,circuitofinal,lista_solucion):   
         
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
         plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
@@ -264,11 +262,11 @@ class Laberinto(object):
             else:
                 plt.plot([c,c],[f,f+1],color='dimgray',linestyle="--")
             
-            '''if(i in hola):
+            if(i in hola):
                 ymin=1-(f/self.filas) 
                 print("hola",ymin)
                 ymax=ymin - (1/self.filas)
-                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='yellow')'''
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='yellow')
                 
                 
                 
@@ -334,6 +332,7 @@ class Laberinto(object):
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
                 casilla.set_valor(v) 
+                print('IMPRIMO V ',v)
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
@@ -394,36 +393,25 @@ class Laberinto(object):
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'BREADTH',estado_objetivo,None)
+        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         while(b.objetivo(estado_objetivo,estado)!=True): 
            
             nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
-            print("esto lo saca",nodo.get_id_estado())
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
-            funcion_sucesores=b.creacion_sucesores(estado)
-            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'BREADTH',estado_objetivo,nodo)
+            funcion_sucesores=b.creacion_sucesores(estado,estados)
+            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        print(frontera)
         frontera=self.comprobarfrontera2(circuitofinal,frontera)
 
         lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
         b.imprimir_solucion(lista_solucion)
         
-        for i in frontera:
-            print(i[4].get_id_estado())
-
-        for i in circuitofinal:
-            print("circuito",i.get_id_estado())
-            print("valor", i.get_valor())
-
-        for i in lista_solucion:
-            print(i.get_id_estado())
         
-        return estado ,frontera , circuitofinal
+        return estado ,frontera , circuitofinal,lista_solucion
     
 
     def comprobarfrontera(self,circuitofinal,frontera):
