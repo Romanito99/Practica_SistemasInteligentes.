@@ -40,97 +40,24 @@
             "value": 3,
             "neighbors": [
                 false,
-<<<<<<< HEAD
-                false,
-                true,
-                false
-            ]
-        },
-        "(0, 2)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(0, 3)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(0, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(0, 5)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(0, 6)": {
-=======
                 true,
                 true,
                 false
             ]
         },
         "(0, 2)": {
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 false,
-<<<<<<< HEAD:laberinto.json
-                true,
-                true,
-                true
-            ]
-        },
-<<<<<<< HEAD
-        "(0, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-=======
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
                 false,
                 true,
                 true
             ]
         },
-        "(0, 8)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                false
-            ]
-        },
-        "(0, 9)": {
-            "value": 0,
-            "neighbors": [
-=======
         "(0, 3)": {
             "value": 2,
             "neighbors": [
                 false,
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false,
                 true,
                 false
@@ -168,7 +95,7 @@
             "neighbors": [
                 true,
                 true,
-                false,
+                true,
                 true
             ]
         },
@@ -177,18 +104,6 @@
             "neighbors": [
                 true,
                 true,
-<<<<<<< HEAD:laberinto.json
-                false,
-                true
-            ]
-        },
-<<<<<<< HEAD
-        "(1, 4)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-=======
                 true,
                 true
             ]
@@ -198,58 +113,20 @@
             "neighbors": [
                 true,
                 false,
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
                 true,
                 true
             ]
         },
-        "(1, 5)": {
-=======
         "(2, 0)": {
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-<<<<<<< HEAD
-                true,
-                false
-            ]
-        },
-        "(1, 6)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(1, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(1, 8)": {
             "value": 0,
             "neighbors": [
                 true,
                 true,
                 true,
-                false
-            ]
-        },
-        "(1, 9)": {
-=======
                 false
             ]
         },
         "(2, 1)": {
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
             "value": 0,
             "neighbors": [
                 true,
@@ -258,101 +135,15 @@
                 true
             ]
         },
-<<<<<<< HEAD
-        "(2, 1)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                true
-            ]
-        },
-=======
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
         "(2, 2)": {
             "value": 0,
             "neighbors": [
-                false,
-<<<<<<< HEAD
+                true,
                 true,
                 true,
                 true
             ]
         },
-        "(2, 3)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-=======
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
-                false,
-                true
-            ]
-        },
-<<<<<<< HEAD
-        "(2, 4)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(2, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(2, 6)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-<<<<<<< HEAD:laberinto.json
-                true
-            ]
-        },
-        "(2, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(2, 8)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                false
-=======
-                true,
-                true,
-                true
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
-            ]
-        },
-        "(2, 9)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-=======
         "(2, 3)": {
             "value": 0,
             "neighbors": [
@@ -380,12 +171,7 @@
                 false
             ]
         },
-<<<<<<< HEAD:laberinto.json
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
-        "(3, 0)": {
-=======
         "(3, 1)": {
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
             "value": 0,
             "neighbors": [
                 false,
@@ -416,80 +202,9 @@
             "value": 1,
             "neighbors": [
                 false,
-<<<<<<< HEAD
-                false,
-                false
-            ]
-        },
-        "(3, 1)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(3, 2)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(3, 3)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(3, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(3, 5)": {
-            "value": 0,
-            "neighbors": [
-                false,
                 false,
                 true,
                 true
-            ]
-        },
-        "(3, 6)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(3, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-=======
-                false,
-<<<<<<< HEAD:laberinto.json
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
-                false
-=======
-                true,
-                true
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
             ]
         },
         "(4, 0)": {
@@ -497,29 +212,7 @@
             "neighbors": [
                 true,
                 true,
-<<<<<<< HEAD
-                true,
-                true
-            ]
-        },
-        "(3, 9)": {
-            "value": 0,
-            "neighbors": [
                 false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(4, 0)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-=======
-                false,
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
                 false
             ]
         },
@@ -527,19 +220,7 @@
             "value": 0,
             "neighbors": [
                 true,
-<<<<<<< HEAD:laberinto.json
-                false,
-<<<<<<< HEAD
                 true,
-                true
-            ]
-        },
-        "(4, 2)": {
-            "value": 0,
-            "neighbors": [
-=======
-                true,
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
                 false,
                 true
             ]
@@ -549,528 +230,11 @@
             "neighbors": [
                 true,
                 false,
-<<<<<<< HEAD:laberinto.json
-                false
-            ]
-        },
-        "(4, 3)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                true
-            ]
-        },
-        "(4, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                true
-            ]
-        },
-        "(4, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                true
-            ]
-        },
-        "(4, 6)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                false
-            ]
-        },
-        "(4, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(4, 8)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(4, 9)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(5, 0)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(5, 1)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(5, 2)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(5, 3)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                true
-            ]
-        },
-        "(5, 4)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(5, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(5, 6)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(5, 7)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(5, 8)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                true
-            ]
-        },
-        "(5, 9)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(6, 0)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(6, 1)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(6, 2)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(6, 3)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(6, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(6, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                false
-            ]
-        },
-        "(6, 6)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(6, 7)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                true
-            ]
-        },
-        "(6, 8)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                true
-            ]
-        },
-        "(6, 9)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(7, 0)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(7, 1)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                false,
-                true
-            ]
-        },
-        "(7, 2)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                false
-            ]
-        },
-        "(7, 3)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(7, 4)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(7, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                true
-            ]
-        },
-        "(7, 6)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(7, 7)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                true
-            ]
-        },
-        "(7, 8)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(7, 9)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(8, 0)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                false
-            ]
-        },
-        "(8, 1)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                true,
-                true
-            ]
-        },
-        "(8, 2)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                true
-            ]
-        },
-        "(8, 3)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(8, 4)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                false
-            ]
-        },
-        "(8, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                true,
-                false
-            ]
-        },
-        "(8, 6)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(8, 7)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                true,
-                false
-            ]
-        },
-        "(8, 8)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(8, 9)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                false,
-                true,
-                true
-            ]
-        },
-        "(9, 0)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(9, 1)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(9, 2)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                false
-            ]
-        },
-        "(9, 3)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                true,
-                false,
-                true
-            ]
-        },
-        "(9, 4)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                true
-            ]
-        },
-        "(9, 5)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(9, 6)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(9, 7)": {
-            "value": 0,
-            "neighbors": [
-                true,
-                false,
-                false,
-                false
-            ]
-        },
-        "(9, 8)": {
-            "value": 0,
-            "neighbors": [
-                false,
-                true,
-                false,
-                false
-            ]
-        },
-        "(9, 9)": {
-=======
-                true
-            ]
-        },
-        "(3, 3)": {
->>>>>>> c657bd433fb1c86e5201c903c5612a6f103ec88a
-=======
                 false,
                 true
             ]
         },
         "(4, 3)": {
->>>>>>> 98d809a8a8596fc15b411f2a8df16fc8273cc3d0:problema_5x5_maze.json
             "value": 0,
             "neighbors": [
                 true,
