@@ -119,8 +119,7 @@ class Busqueda():
             if repetido==False:
                 f,c=i.get_id_estado()
                 A=(i.get_valor(),f,c,i.get_id(),i)
-                print("iteraccion")
-                print(A[4].get_id_estado())
+                
                 heapq.heappush(frontera,A)
                 
            
@@ -139,7 +138,7 @@ class Busqueda():
                 id_estado= i[1]
                 accion=i[0]
                 profundidad=nodo_padre.get_profundidad()+1
-                print("profundidad",profundidad)
+                
                 costo= nodo_padre.get_costo() +  i[2]  
                  
             else:
@@ -219,7 +218,7 @@ class Busqueda():
     def encontrar_solucion(self, circuitofinal, estado_inicial):
         lista_solucion=[]
         circuitofinal= list(reversed(circuitofinal))
-        print(circuitofinal)
+        
         nodo_final=circuitofinal[0]
         lista_solucion.append(nodo_final)
         nodo_aux=nodo_final
