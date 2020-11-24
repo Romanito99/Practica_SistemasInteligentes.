@@ -228,7 +228,7 @@ class Laberinto(object):
     def dibujar(self,casillas,frontera,circuitofinal,lista_solucion):   
         
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
-        plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
+        plt.figure(figsize=(self.filas-3, self.columnas-3))
 
         plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
         
@@ -243,30 +243,55 @@ class Laberinto(object):
             
             if (i.get_S()==False):
                 
-                plt.plot([c,c+1],[f+1,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c+1],[f+1,f+1],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f+1,f+1],color='black',linewidth=3.0)
+            
+                
             if (i.get_E()==False):
 
-                plt.plot([c+1,c+1],[f,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c+1,c+1],[f,f+1],color='dimgray',linestyle="--")
+                plt.plot([c+1,c+1],[f,f+1],color='black',linewidth=3.0)
+            
             if (i.get_N()==False):
 
-                plt.plot([c,c+1],[f,f],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c+1],[f,f],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f,f],color='black',linewidth=3.0)
+            
             if (i.get_O()==False):
 
-                plt.plot([c,c],[f,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c],[f,f+1],color='dimgray',linestyle="--")
-            
-            if(i in hola):
-                ymin=1-(f/self.filas) 
-                print("hola",ymin)
+                plt.plot([c,c],[f,f+1],color='black',linewidth=3.0)
+            if i.get_valor()==0:
+                ymin=1-(f/self.filas)
                 ymax=ymin - (1/self.filas)
-                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='yellow')
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='white')
+            elif i.get_valor()==1:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='bisque')   
+            elif i.get_valor()==2:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lightgreen')   
+            elif i.get_valor()==3:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lightskyblue') 
+            
+            
+            for j in frontera:
+                if(i.get_tupla() == j[4].get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='blue')
+            for w in circuitofinal:
+                if(i.get_tupla() == w.get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lime')
+
+            for u in lista_solucion:
+                if(i.get_tupla() == u.get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='red')        
+
                 
                 
                 
@@ -332,7 +357,7 @@ class Laberinto(object):
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
                 casilla.set_valor(v) 
-                print('IMPRIMO V ',v)
+                
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
@@ -424,8 +449,7 @@ class Laberinto(object):
         return nodo , frontera
 
     def comprobarfrontera2(self,circuitofinal,frontera):
-        #nodo=heapq.heappop(frontera)[4]
-        #print("hola",nodo.get_id_estado())
+        
         if(len(frontera)!=0):
             for i in circuitofinal:
 
@@ -434,4 +458,4 @@ class Laberinto(object):
                         frontera.remove(j)
         return  frontera
 
-a=Laberinto("problema_5x5_maze.json")
+a=Laberinto("problema_25x25_maze.json")
