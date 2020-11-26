@@ -7,6 +7,7 @@ from nodo import Nodo
 import queue
 from time import sleep
 import heapq
+import os.path as path
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
@@ -24,7 +25,12 @@ class Laberinto(object):
             self.casillas=self.tablero()
             self.to_json(self.casillas)
 
-        estado,frontera,circuitofinal,lista_solucion=self.problema()
+        if (self.problema()):
+            print("no funciona")
+        else:
+            estado,frontera,circuitofinal,lista_solucion=self.problema()
+
+        #estado,frontera,circuitofinal,lista_solucion=self.problema()
         self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion)
         print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
@@ -380,38 +386,62 @@ class Laberinto(object):
                     return True
         return False
 
+    def comprobar_integridad_fichero_nodos(self,estado_inicial,estado_objetivo,maze):
+        print(estado_objetivo)
+        f_inicial=estado_inicial.split(',')[0].split('(')[1]
+        c_inicial=estado_inicial.split(',')[1].split(')')[0]
+
+        f_objetivo=estado_objetivo.split(',')[0].split('(')[1]
+        c_objetivo=estado_objetivo.split(',')[1].split(')')[0]
+        if(f_inicial<0 or c_inicial<0 or f_inicial>self.filas-1 or c_inicial>self.columnas-1):
+            print("Error en el json")
+            return False
+        if (f_objetivo<0 or c_objetivo<0 or f_objetivo>self.filas-1 or c_objetivo>self.columnas-1):
+            print("Error en el json")
+            return False
+        if not path.exists(maze):
+            print("no existe el json principal")
+            return False
+        else:
+            return True
+
+
     def problema(self):
         circuitofinal=[]
         b=Busqueda()
         frontera= []
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
-        estado_inicial,estado_objetivo=b.readjson("prueba.json")
-        
-        estado_inicial=b.conversion_estado(estado_inicial,estados)
-        estado_objetivo=b.conversion_estado(estado_objetivo,estados)
-        
-        funcion_sucesores.append(estado_inicial)
-        
-        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
-        
-        estado=estado_inicial
-        frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        while(b.objetivo(estado_objetivo,estado)!=True): 
-           
-            nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
-            circuitofinal.append(nodo)
-            estado=b.nodo_a_estado(nodo,estados)
-            funcion_sucesores=b.creacion_sucesores(estado,estados)
-            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
-            frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        frontera=self.comprobarfrontera2(circuitofinal,frontera)
+        maze,estado_inicial,estado_objetivo=b.readjson("prueba.json")
+        if(self.comprobar_integridad_fichero_nodos(estado_inicial,estado_objetivo,maze)):
 
-        lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
-        b.imprimir_solucion(lista_solucion)
+            estado_inicial=b.conversion_estado(estado_inicial,estados)
+            estado_objetivo=b.conversion_estado(estado_objetivo,estados)
+            
+            funcion_sucesores.append(estado_inicial)
+            
+            lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
+            
+            estado=estado_inicial
+            frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
+            while(b.objetivo(estado_objetivo,estado)!=True): 
+            
+                nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
+                circuitofinal.append(nodo)
+                estado=b.nodo_a_estado(nodo,estados)
+                funcion_sucesores=b.creacion_sucesores(estado,estados)
+                lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
+                frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
+            frontera=self.comprobarfrontera2(circuitofinal,frontera)
+
+            lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
+            b.imprimir_solucion(lista_solucion)
+            
+            
+            return estado ,frontera , circuitofinal,lista_solucion
+        else:
+            return True
         
-        
-        return estado ,frontera , circuitofinal,lista_solucion
     
 
     def comprobarfrontera(self,circuitofinal,frontera):

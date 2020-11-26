@@ -30,7 +30,7 @@ class Busqueda():
             maze=datos['MAZE']
            
 
-        return initial,objetive 
+        return initial,objetive,maze
 
     def creacion_sucesores(self,estado,lista_estados):
         f,c =estado.get_tupla()
