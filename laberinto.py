@@ -234,7 +234,7 @@ class Laberinto(object):
     def dibujar(self,casillas,frontera,circuitofinal,lista_solucion):   
         
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
-        plt.figure(figsize=(self.filas+0.1, self.columnas+0.1))
+        plt.figure(figsize=(self.filas-3, self.columnas-3))
 
         plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
         
@@ -249,30 +249,55 @@ class Laberinto(object):
             
             if (i.get_S()==False):
                 
-                plt.plot([c,c+1],[f+1,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c+1],[f+1,f+1],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f+1,f+1],color='black',linewidth=3.0)
+            
+                
             if (i.get_E()==False):
 
-                plt.plot([c+1,c+1],[f,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c+1,c+1],[f,f+1],color='dimgray',linestyle="--")
+                plt.plot([c+1,c+1],[f,f+1],color='black',linewidth=3.0)
+            
             if (i.get_N()==False):
 
-                plt.plot([c,c+1],[f,f],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c+1],[f,f],color='dimgray',linestyle="--")
+                plt.plot([c,c+1],[f,f],color='black',linewidth=3.0)
+            
             if (i.get_O()==False):
 
-                plt.plot([c,c],[f,f+1],color='white',linewidth=3.0)
-            else:
-                plt.plot([c,c],[f,f+1],color='dimgray',linestyle="--")
-            
-            if(i in hola):
-                ymin=1-(f/self.filas) 
-                print("hola",ymin)
+                plt.plot([c,c],[f,f+1],color='black',linewidth=3.0)
+            if i.get_valor()==0:
+                ymin=1-(f/self.filas)
                 ymax=ymin - (1/self.filas)
-                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='yellow')
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='white')
+            elif i.get_valor()==1:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='bisque')   
+            elif i.get_valor()==2:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lightgreen')   
+            elif i.get_valor()==3:
+                ymin=1-(f/self.filas)
+                ymax=ymin - (1/self.filas)
+                plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lightskyblue') 
+            
+            
+            for j in frontera:
+                if(i.get_tupla() == j[4].get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='blue')
+            for w in circuitofinal:
+                if(i.get_tupla() == w.get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='lime')
+
+            for u in lista_solucion:
+                if(i.get_tupla() == u.get_id_estado()):
+                    ymin=1-(f/self.filas)
+                    ymax=ymin - (1/self.filas)
+                    plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='red')        
+
                 
                 
                 
@@ -338,7 +363,7 @@ class Laberinto(object):
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
                 casilla.set_valor(v) 
-                print('IMPRIMO V ',v)
+                
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
@@ -412,35 +437,34 @@ class Laberinto(object):
         frontera= []
         funcion_sucesores=[]
         estados=b.generar_estados(self.casillas)
-        maze,estado_inicial,estado_objetivo=b.readjson("prueba.json")
-        if(self.comprobar_integridad_fichero_nodos(estado_inicial,estado_objetivo,maze)):
-
-            estado_inicial=b.conversion_estado(estado_inicial,estados)
-            estado_objetivo=b.conversion_estado(estado_objetivo,estados)
-            
-            funcion_sucesores.append(estado_inicial)
-            
-            lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
-            
-            estado=estado_inicial
+        estado_inicial,estado_objetivo=b.readjson("prueba.json")
+        
+        estado_inicial=b.conversion_estado(estado_inicial,estados)
+        estado_objetivo=b.conversion_estado(estado_objetivo,estados)
+        
+        funcion_sucesores.append(estado_inicial)
+        
+        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,'BREADTH',estado_objetivo,None)
+        
+        estado=estado_inicial
+        frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
+        while(b.objetivo(estado_objetivo,estado)!=True): 
+           
+            nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
+            circuitofinal.append(nodo)
+            estado=b.nodo_a_estado(nodo,estados)
+            funcion_sucesores=b.creacion_sucesores(estado,estados)
+            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,'BREADTH',estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-            while(b.objetivo(estado_objetivo,estado)!=True): 
-            
-                nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
-                circuitofinal.append(nodo)
-                estado=b.nodo_a_estado(nodo,estados)
-                funcion_sucesores=b.creacion_sucesores(estado,estados)
-                lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
-                frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-            frontera=self.comprobarfrontera2(circuitofinal,frontera)
-
-            lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
-            b.imprimir_solucion(lista_solucion)
-            
-            
-            return estado ,frontera , circuitofinal,lista_solucion
-        else:
-            return True
+        
+        frontera=self.comprobarfrontera2(circuitofinal,frontera)
+        
+        frontera=self.ultimosvecinos(lista_nodos,frontera)
+        for w in frontera:
+            print(w[4].get_id_estado())
+        lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
+        b.imprimir_solucion(lista_solucion)
+        
         
     
 
@@ -448,14 +472,14 @@ class Laberinto(object):
         nodo=heapq.heappop(frontera)[4]
         if(len(frontera)!=0):
             for i in circuitofinal:
-
-                while nodo.get_id_estado()== i.get_id_estado():
-                    nodo=heapq.heappop(frontera)[4]
+                    
+                if nodo.get_id_estado()== i.get_id_estado():
+                    nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
+                    
         return nodo , frontera
 
     def comprobarfrontera2(self,circuitofinal,frontera):
-        #nodo=heapq.heappop(frontera)[4]
-        #print("hola",nodo.get_id_estado())
+        
         if(len(frontera)!=0):
             for i in circuitofinal:
 
@@ -463,5 +487,12 @@ class Laberinto(object):
                     if(i.get_id_estado()==j[4].get_id_estado()):
                         frontera.remove(j)
         return  frontera
-
-a=Laberinto("problema_5x5_maze.json")
+    def ultimosvecinos(self,lista_nodos,frontera):
+        
+        if(len(frontera)!=0):
+            for i in lista_nodos: 
+                for u in frontera:
+                    if (i.get_id_estado()==u[4].get_id_estado()):
+                        frontera.remove(u)
+        return frontera
+a=Laberinto("problema_25x25_maze.json")
