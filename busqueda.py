@@ -38,6 +38,7 @@ class Busqueda():
         sucesores=[]
         lista_vecinos=estado.get_vecinos()
         
+        
         for i in lista_vecinos:
             if(i==(f-1,c)):
                 sucesor=self.conversion_estado(str((f-1,c)),lista_estados)
@@ -125,7 +126,7 @@ class Busqueda():
            
         return frontera
     
-    def creacion_nodo(self, funcion_sucesores, id, estado,estrategia,  objetivo,nodo_padre):
+    def creacion_nodo(self, funcion_sucesores, identificador, estado,estrategia,  objetivo,nodo_padre):
         lista_nodos=[]
         valor=0
         heuristica=0
@@ -133,7 +134,7 @@ class Busqueda():
         
         for i in funcion_sucesores:
             
-            if(id!=0):
+            if(identificador!=0):
                 id_padre= nodo_padre.get_id()
                 id_estado= i[1]
                 accion=i[0]
@@ -148,18 +149,22 @@ class Busqueda():
                 profundidad=0
                 costo=0
             
-            nodo=Nodo(id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
+            nodo=Nodo(identificador,costo,id_estado,id_padre,accion,profundidad,heuristica,valor)
+            
             heuristica=self.heuristic(nodo , id_estado , objetivo.get_tupla())
             nodo.set_heuristica(heuristica)
             valor=self.value(nodo,estrategia)
-            id+=1
             
-            nodo.set_valor(valor)  
+
+            identificador+=1
+            
+            nodo.set_valor(valor) 
+            print(nodo.get_id(),nodo.get_id_estado(), nodo.get_id_padre(),nodo.get_valor()) 
            
             lista_nodos.append(nodo)
             
         
-        return lista_nodos,id
+        return lista_nodos,identificador
 
         '''En este metodo he cambiado como calcular el valor y la heuristica , falta mirar bien como cambiar el costo ( hay que cambiar tanto el costo de cada nodo '''
         '''y luego el costo total), creo que deberiamos pasarle la lista estados y utilizar el metodo nodotoestado y coger de ahi el valor y sumarle 1 y el cost general''' 

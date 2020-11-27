@@ -418,7 +418,7 @@ class Laberinto(object):
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, id = b.creacion_nodo(funcion_sucesores, 0, None ,'A',estado_objetivo,None)
+        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,'BREADTH',estado_objetivo,None)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
@@ -428,10 +428,14 @@ class Laberinto(object):
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado,estados)
-            lista_nodos, id=b.creacion_nodo(funcion_sucesores, id,  estado,'A',estado_objetivo,nodo)
+            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,'BREADTH',estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
+        
         frontera=self.comprobarfrontera2(circuitofinal,frontera)
-
+        
+        frontera=self.ultimosvecinos(lista_nodos,frontera)
+        for w in frontera:
+            print(w[4].get_id_estado())
         lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
         b.imprimir_solucion(lista_solucion)
         
@@ -443,9 +447,10 @@ class Laberinto(object):
         nodo=heapq.heappop(frontera)[4]
         if(len(frontera)!=0):
             for i in circuitofinal:
-
-                while nodo.get_id_estado()== i.get_id_estado():
-                    nodo=heapq.heappop(frontera)[4]
+                    
+                if nodo.get_id_estado()== i.get_id_estado():
+                    nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
+                    
         return nodo , frontera
 
     def comprobarfrontera2(self,circuitofinal,frontera):
@@ -457,5 +462,12 @@ class Laberinto(object):
                     if(i.get_id_estado()==j[4].get_id_estado()):
                         frontera.remove(j)
         return  frontera
-
+    def ultimosvecinos(self,lista_nodos,frontera):
+        
+        if(len(frontera)!=0):
+            for i in lista_nodos: 
+                for u in frontera:
+                    if (i.get_id_estado()==u[4].get_id_estado()):
+                        frontera.remove(u)
+        return frontera
 a=Laberinto("problema_25x25_maze.json")
