@@ -214,8 +214,9 @@ class Busqueda():
         DisManhattan= abs(f-f1)+ abs(c-c1)
         return DisManhattan
 
-    def imprimir_solucion(self, lista_solucion):
-        with open('solucion.txt','w') as f:
+    def imprimir_solucion(self, lista_solucion,fila,columna,estrategia):
+        fichero='sol_{}x{}_{}.txt'.format(fila,columna,estrategia)
+        with open(fichero,'w') as f:
             f.write('[id][cost,state,father_id,action,depth,h,value]\n')
             for i in lista_solucion:
                 f.write('[{}][{},{},{},{},{},{},{}]\n'.format(i.get_id(),i.get_costo(),i.get_id_estado(),i.get_id_padre(),i.get_accion(),i.get_profundidad(),i.get_heuristica(),i.get_valor()))
