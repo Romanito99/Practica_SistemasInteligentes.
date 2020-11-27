@@ -159,7 +159,7 @@ class Busqueda():
             identificador+=1
             
             nodo.set_valor(valor) 
-            print(nodo.get_id(),nodo.get_id_estado(), nodo.get_id_padre(),nodo.get_valor()) 
+            
            
             lista_nodos.append(nodo)
             
