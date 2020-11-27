@@ -4,29 +4,57 @@ from casilla import Casilla
 import matplotlib.pyplot as plt
 from busqueda import Busqueda
 from nodo import Nodo
-import queue
-from time import sleep
 import heapq
+import os.path as path
+import argparse
+import os 
 
 class Laberinto(object):
     def __init__(self,*args,**kwargs):
         '''Metodo constructor de la clase laberinto'''
-        
+        b=Busqueda()
         self.prueba=2
-        if (len(args)==1):
+        print(len(args),'longitud de args')
+        print(args[0])
+        print(isinstance(args[1],str))
+        if (len(args)==2) and isinstance(args[0],str) and isinstance(args[1],str):
             self.read_json(args[0])
             if(self.comprobar_integridad()):
                 print("Ha dado error en el json")
+
+            estado_inicial,estado_objetivo,maze=b.readjson(args[1])
 
         else:
             self.filas=args[0]
             self.columnas=args[1]
             self.casillas=self.tablero()
             self.to_json(self.casillas)
+            estado_inicial=str((0,0))
+            estado_objetivo=str((self.filas-1,self.columnas-1))
+            maze=None
 
-        estado,frontera,circuitofinal,lista_solucion=self.problema()
-        self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion)
-        print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
+        
+        estados=b.generar_estados(self.casillas)
+        
+        if(self.comprobar_integridad_fichero_nodos(estado_inicial,estado_objetivo,maze)):
+            print('Introduzca la estrategia del problema\n')
+            estrategia=str(input('>>'))
+            estrategia=estrategia.upper()
+            print('las estrategia es ',estrategia)
+            if estrategia!='A' and estrategia!='BREATH' and estrategia!='DEPTH' and estrategia!='UNIFORM' and estrategia!='GREEDY':
+                print('Error introduciendo estrategia\n')
+                print('Las estrategias disponibles son: A, BREATH, DEPTH, UNIFORM, GREEDY\n')
+            else:
+                
+                estado,frontera,circuitofinal,lista_solucion=self.problema(estado_inicial,estado_objetivo,maze,estados,estrategia)
+                self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion,estrategia)
+                b.imprimir_solucion(lista_solucion,self.filas,self.columnas,estrategia)
+        else:
+            print("Finalizando programa....")
+
+        #estado,frontera,circuitofinal,lista_solucion=self.problema()
+        #self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion)
+        #print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
 
     def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
@@ -225,7 +253,7 @@ class Laberinto(object):
 
         return numero
 
-    def dibujar(self,casillas,frontera,circuitofinal,lista_solucion):   
+    def dibujar(self,casillas,frontera,circuitofinal,lista_solucion,estrategia):   
         
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
         plt.figure(figsize=(self.filas-3, self.columnas-3))
@@ -294,9 +322,9 @@ class Laberinto(object):
 
                 
                 
-                
+              
 
-        plt.savefig("laberinto.png")
+        plt.savefig("solution_{}x{}_{}_20.png".format(self.filas,self.columnas,estrategia))
 
     def to_json(self,casillas):
         '''Se construye el json con la lista de casillas y sus atributos'''
@@ -324,8 +352,8 @@ class Laberinto(object):
             dicc_cells[tupla].update(dicc_tuplas)
             data['cells'].update(dicc_cells)
 
-
-        with open("laberinto.json", "w") as f:
+        fichero='problema_{}x{}_maze.json'.format(self.filas,self.columnas)
+        with open(fichero, "w") as f:
             json.dump(data, f,indent=4)
 
     def read_json(self,fichero_json):
@@ -405,20 +433,52 @@ class Laberinto(object):
                     return True
         return False
 
-    def problema(self):
+    def comprobar_integridad_fichero_nodos(self,estado_inicial,estado_objetivo,maze):
+        print(estado_objetivo)
+        f_inicial=int(estado_inicial.split(',')[0].split('(')[1])
+        c_inicial=int(estado_inicial.split(',')[1].split(')')[0])
+
+        f_objetivo=int(estado_objetivo.split(',')[0].split('(')[1])
+        c_objetivo=int(estado_objetivo.split(',')[1].split(')')[0])
+        if(f_inicial<0 or c_inicial<0 or f_inicial>self.filas-1 or c_inicial>self.columnas-1):
+            print("Error en el json")
+            return False
+        if (f_objetivo<0 or c_objetivo<0 or f_objetivo>self.filas-1 or c_objetivo>self.columnas-1):
+            print("Error en el json")
+            return False
+        if maze is None:
+            return True
+        else:
+            if not path.exists(maze):
+                print("no existe el json principal")
+                return False
+            if path.exists(maze):
+                maze=maze.split('_')
+                filas_columnas=maze[1].split('x')
+                filas=int(filas_columnas[0])
+                columnas=int(filas_columnas[1])
+                if filas!=self.filas or columnas!=self.columnas:
+                    print("el fichero json no es correcto")
+                    return False
+                else:
+                    return True
+        
+
+
+    def problema(self,estado_inicial,estado_objetivo,maze,estados,estrategia):
         circuitofinal=[]
         b=Busqueda()
         frontera= []
         funcion_sucesores=[]
-        estados=b.generar_estados(self.casillas)
-        estado_inicial,estado_objetivo=b.readjson("prueba.json")
+        #estados=b.generar_estados(self.casillas)
+        #estado_inicial,estado_objetivo=b.readjson("prueba.json")
         
         estado_inicial=b.conversion_estado(estado_inicial,estados)
         estado_objetivo=b.conversion_estado(estado_objetivo,estados)
         
         funcion_sucesores.append(estado_inicial)
         
-        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,'BREADTH',estado_objetivo,None)
+        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,estrategia,estado_objetivo,None)
         
         estado=estado_inicial
         frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
@@ -428,7 +488,7 @@ class Laberinto(object):
             circuitofinal.append(nodo)
             estado=b.nodo_a_estado(nodo,estados)
             funcion_sucesores=b.creacion_sucesores(estado,estados)
-            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,'BREADTH',estado_objetivo,nodo)
+            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,estrategia,estado_objetivo,nodo)
             frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
         
         frontera=self.comprobarfrontera2(circuitofinal,frontera)
@@ -437,11 +497,10 @@ class Laberinto(object):
         for w in frontera:
             print(w[4].get_id_estado())
         lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
-        b.imprimir_solucion(lista_solucion)
+        
         
         
         return estado ,frontera , circuitofinal,lista_solucion
-    
 
     def comprobarfrontera(self,circuitofinal,frontera):
         nodo=heapq.heappop(frontera)[4]
@@ -470,4 +529,45 @@ class Laberinto(object):
                     if (i.get_id_estado()==u[4].get_id_estado()):
                         frontera.remove(u)
         return frontera
-a=Laberinto("problema_25x25_maze.json")
+
+
+def argumentos():
+    parser = argparse.ArgumentParser(description='nombre del archivo, numero de filas,numero de columnas')
+    parser.add_argument("-r","--rows",required=False, help='numero de filas',type=int)
+    parser.add_argument("-c","--columns",required=False,help='numero de columnas',type=int)
+    parser.add_argument("-f","--file",required=False,help='archivo json',type=str)
+    parser.add_argument("-p","--problem",required=False,help='archivo problema',type=str)
+
+    args=parser.parse_args()
+    return args
+
+def main():
+    args= argumentos()
+    archivo_maze=args.file
+    filas=args.rows
+    columnas=args.columns
+    archivo_problem=args.problem
+    
+    if archivo_maze is not None and archivo_problem is not None:
+
+        a=Laberinto(archivo_maze,archivo_problem)
+    elif archivo_maze is None and filas is None and columnas is None:
+        print("¿le gustaria trabajar con un archivo? Si/No\n")
+        opcion=str(input('>>'))
+        if opcion.upper()== 'SI':
+            print('Introduzca un nombre de fichero laberinto\n')
+            fichero_laberinto=str(input('>>'))
+            print('Introduzca un nombre de fichero problema\n')
+            fichero_problema=str(input('>>'))
+            a=Laberinto(fichero_laberinto,fichero_problema)
+        if opcion.upper()=='NO':
+            print('Introduzca filas\n')
+            filas=int(input('>>'))
+            print('Introduzca columnas\n')
+            columnas=int(input('>>'))
+            a=Laberinto(filas,columnas)
+    elif filas is not None and columnas is not None:
+        a=Laberinto(filas,columnas)
+    
+
+main()
