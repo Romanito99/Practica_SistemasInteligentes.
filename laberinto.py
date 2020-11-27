@@ -14,14 +14,11 @@ class Laberinto(object):
         '''Metodo constructor de la clase laberinto'''
         b=Busqueda()
         self.prueba=2
-        
         if (len(args)==2) and isinstance(args[0],str) and isinstance(args[1],str):
             self.read_json(args[0])
             if(self.comprobar_integridad()):
                 print("Ha dado error en el json")
-
             estado_inicial,estado_objetivo,maze=b.readjson(args[1])
-
         else:
             self.filas=args[0]
             self.columnas=args[1]
@@ -29,139 +26,114 @@ class Laberinto(object):
             self.to_json(self.casillas)
             estado_inicial=str((0,0))
             estado_objetivo=str((self.filas-1,self.columnas-1))
-            maze=None
-
-        
-        estados=b.generar_estados(self.casillas)
+            maze=None       
+        lista_estados=b.generar_estados(self.casillas)
         
         if(self.comprobar_integridad_fichero_nodos(estado_inicial,estado_objetivo,maze)):
             print('Introduzca la estrategia del problema\n')
             print('Las estrategias disponibles son: A, BREADTH, DEPTH, UNIFORM, GREEDY\n')
             estrategia=str(input('>>'))
-            estrategia=estrategia.upper()
-            
+            estrategia=estrategia.upper()            
             while  (estrategia!='A' and estrategia!='BREADTH' and estrategia!='DEPTH' and estrategia!='UNIFORM' and estrategia!='GREEDY'):
                 print('Error introduciendo estrategia\n')
                 print('RECUERDE: las estrategias disponibles son: A, BREADTH, DEPTH, UNIFORM, GREEDY\n')
                 estrategia=str(input('>>'))
-                estrategia=estrategia.upper()
-                
-            estado,frontera,circuitofinal,lista_solucion=self.problema(estado_inicial,estado_objetivo,maze,estados,estrategia)
-            self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion,estrategia)
+                estrategia=estrategia.upper()                
+            estado,frontera,visitados,lista_solucion=self.problema(estado_inicial,estado_objetivo,maze,lista_estados,estrategia)
+            self.dibujar(self.casillas,frontera,visitados,lista_solucion,estrategia)
             b.imprimir_solucion(lista_solucion,self.filas,self.columnas,estrategia)
         else:
             print("Finalizando programa....")
 
-        #estado,frontera,circuitofinal,lista_solucion=self.problema()
-        #self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion)
-        #print("HAS LLEGADO AL OBJETIVO",estado.get_tupla())
 
-
-    def movimiento_valido(self,no_visitados,visitados,casilla_destino,camino, casillas):
+    def movimiento_valido(self,no_no_recorridos,no_recorridos,casilla_destino,camino, casillas):
         '''En este metodo se realiza el algoritmo de Wilson'''
-
-        while(len(no_visitados)!=0):
+        while(len(no_no_recorridos)!=0):
             x=[]
-
             casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
-            while(casilla_actual in visitados):
+            while(casilla_actual in no_recorridos):
                 casilla_actual=(randint(0,self.filas-1),randint(0,self.columnas-1))
             camino.append(casilla_actual)
-            no_visitados.remove(casilla_actual)
-
-
-            while(casilla_actual not in visitados):
-
+            no_no_recorridos.remove(casilla_actual)
+            while(casilla_actual not in no_recorridos):
                 f,c=casilla_actual
                 movimiento=self.movimiento_random(f,c)
                 if(movimiento==0):
-                    if  ((f-1,c) in no_visitados): #Norte
-
+                    if  ((f-1,c) in no_no_recorridos): #Norte
                         casilla_actual=(f-1,c)
                         camino.append(casilla_actual)
-                        no_visitados.remove(casilla_actual)
+                        no_no_recorridos.remove(casilla_actual)
                     else:
                         if(f-1,c) in camino:
                             n=camino.index((f-1,c))
                             x=camino[n+1:]
-                            no_visitados.extend(x)
+                            no_no_recorridos.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f-1,c)
-                        elif (f-1,c) in visitados:
+                        elif (f-1,c) in no_recorridos:
                             casilla_actual=(f-1,c)
-                            visitados.remove(casilla_actual)
+                            no_recorridos.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
-
+                            camino,casillas,no_recorridos=self.excavar(camino,no_recorridos,casillas)
                 elif(movimiento==1):
-
-                    if ((f,c+1) in no_visitados): #Este
+                    if ((f,c+1) in no_no_recorridos): #Este
                         casilla_actual=(f,c+1)
                         camino.append(casilla_actual)
-                        no_visitados.remove(casilla_actual)
+                        no_no_recorridos.remove(casilla_actual)
                     else:
                         if(f,c+1) in camino:
                             n=camino.index((f,c+1))
                             x=camino[n+1:]
-                            no_visitados.extend(x)
+                            no_no_recorridos.extend(x)
                             camino=camino[:n+1]
-
                             casilla_actual=(f,c+1)
-                        elif (f,c+1) in visitados:
-
+                        elif (f,c+1) in no_recorridos:
                             casilla_actual=(f,c+1)
-                            visitados.remove(casilla_actual)
+                            no_recorridos.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino,casillas,visitados= self.excavar(camino,visitados,casillas)
-
+                            camino,casillas,no_recorridos= self.excavar(camino,no_recorridos,casillas)
                 elif (movimiento==2):
-                    if  ((f+1,c) in no_visitados): #sur
+                    if  ((f+1,c) in no_no_recorridos): #sur
                         casilla_actual=(f+1,c)
                         camino.append(casilla_actual)
-                        no_visitados.remove(casilla_actual)
+                        no_no_recorridos.remove(casilla_actual)
                     else:
                         if(f+1,c) in camino:
-
                             n=camino.index((f+1,c))
                             x=camino[n+1:]
-                            no_visitados.extend(x)
+                            no_no_recorridos.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f+1,c)
-                        elif (f+1,c) in visitados:
-
+                        elif (f+1,c) in no_recorridos:
                             casilla_actual=(f+1,c)
-                            visitados.remove(casilla_actual)
+                            no_recorridos.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
-
+                            camino,casillas,no_recorridos=self.excavar(camino,no_recorridos,casillas)
                 elif(movimiento==3):
-                    if ((f,c-1) in no_visitados): #Este
+                    if ((f,c-1) in no_no_recorridos): #Este
                         casilla_actual=(f,c-1)
                         camino.append(casilla_actual)
-                        no_visitados.remove(casilla_actual)
-
+                        no_no_recorridos.remove(casilla_actual)
                     else:
                         if(f,c-1) in camino:
                             n=camino.index((f,c-1))
                             x=camino[n+1:]
-                            no_visitados.extend(x)
+                            no_no_recorridos.extend(x)
                             camino=camino[:n+1]
                             casilla_actual=(f,c-1)
-
-                        elif (f,c-1) in visitados:
+                        elif (f,c-1) in no_recorridos:
                             casilla_actual=(f,c-1)
-                            visitados.remove(casilla_actual)
+                            no_recorridos.remove(casilla_actual)
                             camino.append(casilla_actual)
-                            camino,casillas,visitados=self.excavar(camino,visitados,casillas)
+                            camino,casillas,no_recorridos=self.excavar(camino,no_recorridos,casillas)
         return casillas
 
-    def excavar(self,camino,visitados,casillas):
+    def excavar(self,camino,no_recorridos,casillas):
         '''Metodo que nos "excava" el camino escogido'''
         n=0
         while(n<(len(camino)-1)):
             f0,c0=camino[n]
             f1,c1=camino[n+1]
-
             encontrado=False
             i=0
             while(encontrado==False):
@@ -187,10 +159,9 @@ class Laberinto(object):
                 casillas[i+1].set_O(True)
 
             n+=1
-
-        visitados.extend(camino)
+        no_recorridos.extend(camino)
         camino=[]
-        return camino,casillas,visitados
+        return camino,casillas,no_recorridos
 
     def generar_tuplas(self):
         ''' Generamos las tuplas (coordenadas) y sus respectivos objetos casilla'''
@@ -207,7 +178,6 @@ class Laberinto(object):
                 tuplas.append(t)
                 casillas.append(casilla)
                 j+=1
-
             i+=1
             j=0
         return tuplas,casillas
@@ -217,16 +187,13 @@ class Laberinto(object):
     def tablero(self):
         '''Metodo principal que usamos para llamar al resto'''
         camino=[]
-        visitados=[]
+        no_recorridos=[]
         casillas=[]
-        no_visitados,casillas=self.generar_tuplas()
+        no_no_recorridos,casillas=self.generar_tuplas()
         casilla_destino=(randint(0,self.filas-1),randint(0,self.columnas-1))
-        visitados.append(casilla_destino)
-        no_visitados.remove(casilla_destino)
-
-
-
-        casillas=self.movimiento_valido(no_visitados,visitados,casilla_destino,camino, casillas)
+        no_recorridos.append(casilla_destino)
+        no_no_recorridos.remove(casilla_destino)
+        casillas=self.movimiento_valido(no_no_recorridos,no_recorridos,casilla_destino,camino, casillas)
         return casillas
 
 
@@ -238,29 +205,19 @@ class Laberinto(object):
             lista_movimientos.remove(0) #norte
         elif (filas==self.filas-1):
             lista_movimientos.remove(2) #sur
-
         if (columnas==0):
             lista_movimientos.remove(3) #Este
         elif (columnas==self.columnas-1):
             lista_movimientos.remove(1) #Oeste
 
         numero=randint(0,len(lista_movimientos)-1)
-
-
-
         numero=lista_movimientos[numero]
-
-
         return numero
 
-    def dibujar(self,casillas,frontera,circuitofinal,lista_solucion,estrategia):   
-        
+    def dibujar(self,casillas,frontera,visitados,lista_solucion,estrategia):          
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
         plt.figure(figsize=(self.columnas -1 , self.filas-1))
-
-        plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
-        
-        
+        plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)       
         plt.ylim(self.filas+0.1,-0.1)
         plt.xlim(-0.1,self.columnas+0.1)
         plt.style.use('dark_background')
@@ -298,7 +255,7 @@ class Laberinto(object):
                     ymin=1-(f/self.filas)
                     ymax=ymin - (1/self.filas)
                     plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='blue')
-            for w in circuitofinal:
+            for w in visitados:
                 if(i.get_tupla() == w.get_id_estado()):
                     ymin=1-(f/self.filas)
                     ymax=ymin - (1/self.filas)
@@ -309,16 +266,11 @@ class Laberinto(object):
                     ymin=1-(f/self.filas)
                     ymax=ymin - (1/self.filas)
                     plt.axvspan(ymin=ymin,ymax=ymax,xmin=c,xmax=c+1,facecolor='red')        
-
-                
-                
-              
-
+               
         plt.savefig("solution_{}x{}_{}_20.png".format(self.filas,self.columnas,estrategia))
 
     def to_json(self,casillas):
         '''Se construye el json con la lista de casillas y sus atributos'''
-
         data={}
         tupla=""
         neighbours=''
@@ -342,7 +294,7 @@ class Laberinto(object):
             dicc_cells[tupla].update(dicc_tuplas)
             data['cells'].update(dicc_cells)
 
-        fichero='problema_{}x{}_maze.json'.format(self.filas,self.columnas)
+        fichero='Problema_{}x{}_maze.json'.format(self.filas,self.columnas)
         with open(fichero, "w") as f:
             json.dump(data, f,indent=4)
 
@@ -366,21 +318,17 @@ class Laberinto(object):
                 valor2=entity.split(',')[1].split(')')[0]
                 tupla=(int(valor1),int(valor2))
                 v=self.cells[entity]["value"]
-                neighbors=self.cells[entity]["neighbors"]
-                #En un futuro debemos splitear y convertir en int a value
+                neighbors=self.cells[entity]["neighbors"]              
                 casilla=Casilla(tupla,v)
-
                 casilla.set_N(neighbors[0])
                 casilla.set_E(neighbors[1])
                 casilla.set_S(neighbors[2])
                 casilla.set_O(neighbors[3])
-                casilla.set_valor(v) 
-                
+                casilla.set_valor(v)                
                 self.casillas.append(casilla)
 
     def comprobar_integridad(self):
         ''' En este metodo se comprueba la integridad del fichero json'''
-
         for i in self.casillas:
             f,c = i.get_tupla()
             if f==0:
@@ -423,8 +371,8 @@ class Laberinto(object):
                     return True
         return False
 
-    def comprobar_integridad_fichero_nodos(self,estado_inicial,estado_objetivo,maze):
-        
+    def comprobar_integridad_fichero_nodos(self,estado_inicial,estado_objetivo,maze): 
+        '''En este medoto comprobamos que el estado inicial y el estado objetivo esten dentro de los intervalos posibles , y que el fichero laberinto sea correcto'''       
         f_inicial=int(estado_inicial.split(',')[0].split('(')[1])
         c_inicial=int(estado_inicial.split(',')[1].split(')')[0])
 
@@ -455,58 +403,50 @@ class Laberinto(object):
         
 
 
-    def problema(self,estado_inicial,estado_objetivo,maze,estados,estrategia):
-        circuitofinal=[]
+    def problema(self,estado_inicial,estado_objetivo,maze,lista_estados,estrategia):
+        '''En este metoodo realizamos la resolucion del problema'''
+        visitados=[]
         b=Busqueda()
         frontera= []
         funcion_sucesores=[]        
-        estado_inicial=b.conversion_estado(estado_inicial,estados)
-        estado_objetivo=b.conversion_estado(estado_objetivo,estados)
-        
-        funcion_sucesores.append(estado_inicial)
-        
-        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,estrategia,estado_objetivo,None)
-        
+        estado_inicial=b.conversion_estado(estado_inicial,lista_estados)
+        estado_objetivo=b.conversion_estado(estado_objetivo,lista_estados)        
+        funcion_sucesores.append(estado_inicial)        
+        lista_nodos, identificador = b.creacion_nodo(funcion_sucesores, 0, None ,estrategia,estado_objetivo,None)       
         estado=estado_inicial
-        frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        while(b.objetivo(estado_objetivo,estado)!=True): 
-           
-            nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
-            circuitofinal.append(nodo)
-            estado=b.nodo_a_estado(nodo,estados)
-            funcion_sucesores=b.creacion_sucesores(estado,estados)
-            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,estrategia,estado_objetivo,nodo)
-            frontera=b.reorden_frontera(frontera, lista_nodos,circuitofinal)
-        
-        frontera=self.comprobarfrontera2(circuitofinal,frontera)
-        
-        frontera=self.ultimosvecinos(lista_nodos,frontera)
-        
-        lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
-        
-        
-        
-        return estado ,frontera , circuitofinal,lista_solucion
+        frontera=b.reorden_frontera(frontera, lista_nodos,visitados)
 
-    def comprobarfrontera(self,circuitofinal,frontera):
+        while(b.objetivo(estado_objetivo,estado)!=True):           
+            nodo,frontera=self.comprobarfrontera(visitados,frontera)
+            visitados.append(nodo)
+            estado=b.nodo_a_estado(nodo,lista_estados)
+            funcion_sucesores=b.creacion_sucesores(estado,lista_estados)
+            lista_nodos, identificador=b.creacion_nodo(funcion_sucesores, identificador,  estado,estrategia,estado_objetivo,nodo)
+            frontera=b.reorden_frontera(frontera, lista_nodos,visitados)        
+        frontera=self.comprobarfrontera2(visitados,frontera)       
+        frontera=self.ultimosvecinos(lista_nodos,frontera)       
+        lista_solucion=b.encontrar_solucion(visitados,estado_inicial)             
+        return estado ,frontera , visitados,lista_solucion
+
+    '''Los siguientes tres metodos los usamos para realizar la poda '''
+    def comprobarfrontera(self,visitados,frontera):
         nodo=heapq.heappop(frontera)[4]
         if(len(frontera)!=0):
-            for i in circuitofinal:
-                    
+            for i in visitados:                   
                 if nodo.get_id_estado()== i.get_id_estado():
-                    nodo,frontera=self.comprobarfrontera(circuitofinal,frontera)
-                    
+                    nodo,frontera=self.comprobarfrontera(visitados,frontera)                    
         return nodo , frontera
 
-    def comprobarfrontera2(self,circuitofinal,frontera):
+    def comprobarfrontera2(self,visitados,frontera):
         
         if(len(frontera)!=0):
-            for i in circuitofinal:
+            for i in visitados:
 
                 for j in frontera:
                     if(i.get_id_estado()==j[4].get_id_estado()):
                         frontera.remove(j)
         return  frontera
+
     def ultimosvecinos(self,lista_nodos,frontera):
         
         if(len(frontera)!=0):
@@ -523,7 +463,6 @@ def argumentos():
     parser.add_argument("-c","--columns",required=False,help='numero de columnas',type=int)
     parser.add_argument("-f","--file",required=False,help='archivo json',type=str)
     parser.add_argument("-p","--problem",required=False,help='archivo problema',type=str)
-
     args=parser.parse_args()
     return args
 
@@ -560,8 +499,7 @@ def main():
             
             a=Laberinto(filas,columnas)
     elif filas is not None and columnas is not None:
-        a=Laberinto(filas,columnas)
-        
+        a=Laberinto(filas,columnas)       
     else:
         print (" Introduzca los dos atributos  , ponga -h para mas informacion")
     
