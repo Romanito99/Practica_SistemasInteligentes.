@@ -14,9 +14,7 @@ class Laberinto(object):
         '''Metodo constructor de la clase laberinto'''
         b=Busqueda()
         self.prueba=2
-        print(len(args),'longitud de args')
-        print(args[0])
-        print(isinstance(args[1],str))
+        
         if (len(args)==2) and isinstance(args[0],str) and isinstance(args[1],str):
             self.read_json(args[0])
             if(self.comprobar_integridad()):
@@ -38,17 +36,19 @@ class Laberinto(object):
         
         if(self.comprobar_integridad_fichero_nodos(estado_inicial,estado_objetivo,maze)):
             print('Introduzca la estrategia del problema\n')
+            print('Las estrategias disponibles son: A, BREADTH, DEPTH, UNIFORM, GREEDY\n')
             estrategia=str(input('>>'))
             estrategia=estrategia.upper()
-            print('las estrategia es ',estrategia)
-            if estrategia!='A' and estrategia!='BREATH' and estrategia!='DEPTH' and estrategia!='UNIFORM' and estrategia!='GREEDY':
+            
+            while  (estrategia!='A' and estrategia!='BREADTH' and estrategia!='DEPTH' and estrategia!='UNIFORM' and estrategia!='GREEDY'):
                 print('Error introduciendo estrategia\n')
-                print('Las estrategias disponibles son: A, BREATH, DEPTH, UNIFORM, GREEDY\n')
-            else:
+                print('RECUERDE: las estrategias disponibles son: A, BREADTH, DEPTH, UNIFORM, GREEDY\n')
+                estrategia=str(input('>>'))
+                estrategia=estrategia.upper()
                 
-                estado,frontera,circuitofinal,lista_solucion=self.problema(estado_inicial,estado_objetivo,maze,estados,estrategia)
-                self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion,estrategia)
-                b.imprimir_solucion(lista_solucion,self.filas,self.columnas,estrategia)
+            estado,frontera,circuitofinal,lista_solucion=self.problema(estado_inicial,estado_objetivo,maze,estados,estrategia)
+            self.dibujar(self.casillas,frontera,circuitofinal,lista_solucion,estrategia)
+            b.imprimir_solucion(lista_solucion,self.filas,self.columnas,estrategia)
         else:
             print("Finalizando programa....")
 
@@ -256,7 +256,7 @@ class Laberinto(object):
     def dibujar(self,casillas,frontera,circuitofinal,lista_solucion,estrategia):   
         
         '''Este metodo se usa para dibujar el laberinto e imprimir la imagen en .png'''
-        plt.figure(figsize=(self.filas-3, self.columnas-3))
+        plt.figure(figsize=(self.columnas -1 , self.filas-1))
 
         plt.axhspan(-0.1, self.columnas+0.1, facecolor='black', alpha=2)
         
@@ -265,26 +265,16 @@ class Laberinto(object):
         plt.xlim(-0.1,self.columnas+0.1)
         plt.style.use('dark_background')
         for i in casillas:
-            
-
             f,c=i.get_tupla()
-            
             if (i.get_S()==False):
-                
-                plt.plot([c,c+1],[f+1,f+1],color='black',linewidth=3.0)
-            
-                
+                plt.plot([c,c+1],[f+1,f+1],color='black',linewidth=3.0)  
             if (i.get_E()==False):
-
-                plt.plot([c+1,c+1],[f,f+1],color='black',linewidth=3.0)
-            
+                plt.plot([c+1,c+1],[f,f+1],color='black',linewidth=3.0)           
             if (i.get_N()==False):
-
-                plt.plot([c,c+1],[f,f],color='black',linewidth=3.0)
-            
+                plt.plot([c,c+1],[f,f],color='black',linewidth=3.0)           
             if (i.get_O()==False):
-
                 plt.plot([c,c],[f,f+1],color='black',linewidth=3.0)
+
             if i.get_valor()==0:
                 ymin=1-(f/self.filas)
                 ymax=ymin - (1/self.filas)
@@ -434,7 +424,7 @@ class Laberinto(object):
         return False
 
     def comprobar_integridad_fichero_nodos(self,estado_inicial,estado_objetivo,maze):
-        print(estado_objetivo)
+        
         f_inicial=int(estado_inicial.split(',')[0].split('(')[1])
         c_inicial=int(estado_inicial.split(',')[1].split(')')[0])
 
@@ -469,10 +459,7 @@ class Laberinto(object):
         circuitofinal=[]
         b=Busqueda()
         frontera= []
-        funcion_sucesores=[]
-        #estados=b.generar_estados(self.casillas)
-        #estado_inicial,estado_objetivo=b.readjson("prueba.json")
-        
+        funcion_sucesores=[]        
         estado_inicial=b.conversion_estado(estado_inicial,estados)
         estado_objetivo=b.conversion_estado(estado_objetivo,estados)
         
@@ -494,8 +481,7 @@ class Laberinto(object):
         frontera=self.comprobarfrontera2(circuitofinal,frontera)
         
         frontera=self.ultimosvecinos(lista_nodos,frontera)
-        for w in frontera:
-            print(w[4].get_id_estado())
+        
         lista_solucion=b.encontrar_solucion(circuitofinal,estado_inicial)
         
         
@@ -532,7 +518,7 @@ class Laberinto(object):
 
 
 def argumentos():
-    parser = argparse.ArgumentParser(description='nombre del archivo, numero de filas,numero de columnas')
+    parser = argparse.ArgumentParser(description='nombre del archivo, numero de filas,numero de columnas, archivo problema. Debe  introducir filas y columnas(-r,-c) o archivo problema y archivo(-f,-p)')
     parser.add_argument("-r","--rows",required=False, help='numero de filas',type=int)
     parser.add_argument("-c","--columns",required=False,help='numero de columnas',type=int)
     parser.add_argument("-f","--file",required=False,help='archivo json',type=str)
@@ -549,25 +535,35 @@ def main():
     archivo_problem=args.problem
     
     if archivo_maze is not None and archivo_problem is not None:
-
-        a=Laberinto(archivo_maze,archivo_problem)
+        if  path.exists(archivo_maze) and path.exists (archivo_problem):
+            a=Laberinto(archivo_maze,archivo_problem)
+        else: 
+            print("Uno de los ficheros no son validos ")
     elif archivo_maze is None and filas is None and columnas is None:
         print("¿le gustaria trabajar con un archivo? Si/No\n")
         opcion=str(input('>>'))
-        if opcion.upper()== 'SI':
+        opcion=opcion.upper()
+        if opcion == 'SI':
             print('Introduzca un nombre de fichero laberinto\n')
             fichero_laberinto=str(input('>>'))
             print('Introduzca un nombre de fichero problema\n')
             fichero_problema=str(input('>>'))
-            a=Laberinto(fichero_laberinto,fichero_problema)
-        if opcion.upper()=='NO':
+            if  path.exists(fichero_laberinto) and path.exists (fichero_problema):
+                a=Laberinto(fichero_laberinto,fichero_problema)
+            else: 
+                print("Uno de los ficheros no son validos ")
+        if opcion =='NO':
             print('Introduzca filas\n')
             filas=int(input('>>'))
             print('Introduzca columnas\n')
             columnas=int(input('>>'))
+            
             a=Laberinto(filas,columnas)
     elif filas is not None and columnas is not None:
         a=Laberinto(filas,columnas)
+        
+    else:
+        print (" Introduzca los dos atributos  , ponga -h para mas informacion")
     
 
 main()
