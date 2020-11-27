@@ -1,8 +1,8 @@
 
 
 class Nodo(object):
-    def __init__(self,id,costo,id_estado,id_padre,accion,profundidad,heuristica,valor):
-        self.id=id
+    def __init__(self,identificador,costo,id_estado,id_padre,accion,profundidad,heuristica,valor):
+        self.id=identificador
         self.costo=costo
         self.id_estado=id_estado
         self.id_padre=id_padre
@@ -11,8 +11,8 @@ class Nodo(object):
         self.heuristica=heuristica
         self.valor=valor
 
-    def set_id(self,id):
-        self.id=id
+    def set_id(self,identificador):
+        self.id=identificador
     def set_costo(self,c):
         self.costo=c
     def set_id_estado(self,e):
