@@ -1,0 +1,16 @@
+Los objetivos de esta practica son:
+Resolución de un problemas mediante distintas estrategias de búsqueda en un espacio de estados.
+
+TAREA1:
+    Soy capaz de crear un un laberinto correcto de un tamaño concreto (número de filas x número de columnas).
+    Soy capaz de salvar ese laberinto como un fichero JSON correcto y una imagen del mismo.
+    Soy capaz de leer un fichero JSON, validar su semántica y crear el laberinto correspondiente.
+    Soy capaz de crear la imagen del laberinto correcto.
+TAREA2:
+    Definir e implementar un artefacto software problema-salir-del-laberinto y todos los necesarios para implementar la creación y manejo del árbol de búsqueda.    
+TAREA3:
+    Introducir diferentes costes en las acciones aplicadas.
+    Definir una función heurística admisible.
+    Implementar el algoritmo de búsqueda en el Espacio de Estados
+    Resolver el problema con las estrategias siguientes: Anchura, Costo Uniforme, Profundidad Acotada, Voraz y A*.
+    OBTENER RESULTADOS IDÉNTICOS A LOS DE LOS FICHEROS EJEMPLO PROPORCIONADOS POR EL PROFESORADO.
